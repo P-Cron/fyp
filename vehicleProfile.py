@@ -1,4 +1,3 @@
-from msilib.schema import IniFile
 import pickle
 class VehicleProfile():
     def __init__(self, reg, date, dataFrame):
