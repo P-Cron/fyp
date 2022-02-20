@@ -24,6 +24,10 @@ dfPlot = df3[['Device Time', '0100', '011c obd standards vehicle conforms to', '
         'pids supported 01-20', 'service 09 pids supported', 'Turbo Boost & Vacuum Gauge(psi)', 'Voltage (OBD Adapter)(V)', \
             'Volumetric Efficiency (Calculated)(%)']]
 
-dfPlot.plot()
-# plt.plot(df2)
+
+dfPlot2 = df3[df3['Volumetric Efficiency (Calculated)(%)'] != '-']['Volumetric Efficiency (Calculated)(%)'] 
+# get all the rows where it is not - and then take just that column 
+dfPlot2 = pd.to_numeric(dfPlot2) # convert a series to numeric
+print(dfPlot2.describe())
+dfPlot2.plot()
 plt.show()
