@@ -27,12 +27,14 @@ for df in [df1, df2, df3]:
     # some other stat should check out now
     print(df['Engine RPM(rpm)'].describe())
 
-# for df in [df1, df2, df3]:
-#     print("-----Next log-----")
-#     print("--- Fuel Rail Pressure(psi) Stats ---")
-#     print(df.head(1)[['Fuel Rail Pressure(psi)']])
+for df in [df1, df2, df3]:
+    print("-----Next log-----")
+    print("--- Fuel Rail Pressure(psi) Stats ---")
+    print(df.head(1)[['Fuel Rail Pressure(psi)']])
 
-#     # some other stat should check out now
-#     print(df['Fuel Rail Pressure(psi)'].describe())
+    # some other stat should check out now
+    print(df['Fuel Rail Pressure(psi)'].describe())
 
 # fuel rail pressure isn't any use really it seems
+
+df1.corr()
