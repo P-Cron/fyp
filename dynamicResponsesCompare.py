@@ -4,7 +4,7 @@ df1 = df[['Device Time', '0903', 'Engine Coolant Temperature(°C)']].copy()
 jan16LogsPath = 'torqueLogs\\trackLog-2022-Jan-16_17-42-53.csv'
 jan23LogsPath = 'torqueLogs\\trackLog-2022-Jan-23_19-26-14.csv'
 jan27LogsPath = 'torqueLogs\\trackLog-2022-Jan-27_12-40-54.csv'
-jan29LogsPath = 'torqueLogs\\trackLog-2022-Jan-29_00-56-43.csv'
+jan29LogsPath = 'torqueLogs\\trackLog-2022-Jan-29_00-56-43_FIXED.csv'
 
 df1 = pd.read_csv(jan16LogsPath)
 df2 = pd.read_csv(jan23LogsPath)
