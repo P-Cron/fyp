@@ -1,3 +1,4 @@
+from cProfile import label
 import pandas as pd
 from matplotlib import pyplot as plt
 from pip import main
@@ -5,15 +6,21 @@ from pip import main
 from logFilesAsDfs import * 
 
 def plotOneValMultDfsOver0(valCheck, dfList):   
+    count = 0
     for df in dfList:
-        df[(df[valCheck] > 0)][valCheck].plot()
+        count += 1
+        df[(df[valCheck] > 0)][valCheck].plot(label=str(count))
 
+    plt.legend(loc='upper left')
     plt.show()
 
 def plotOneValMultDfshasValue(valCheck, dfList):   
+    count = 0
     for df in dfList:
-        df[(df[valCheck] != '-')][valCheck].plot()
+        count += 1
+        df[(df[valCheck] != '-')][valCheck].plot(label='df'+str(count))
 
+    plt.legend(loc='upper left')
     plt.show()
 
 def printDescribes(valCheck, dfList):   
@@ -27,10 +34,13 @@ rpm = 'Engine RPM(rpm)'
 
 boost = 'Turbo Boost & Vacuum Gauge(psi)'
 
-dfList = [accord1, accord2, accord3, accord4, accord5, accord6]
+dfList = [accord1, accord2, accord3, accord4, accord5, accord6, accord7]
 # plotOneValMultDfsOver0(rpm, dfList)
 
 imp = 'Intake Manifold Pressure(psi)'
-# printDescribes(boost, dfList) # no good
+# printDescribes(boost, dfList) # no good, boost is always changing
 
-plotOneValMultDfsOver0(rpm, dfList)
+egrPercent = 'EGR Commanded(%)'
+
+printDescribes(egrPercent, dfList)
+plotOneValMultDfshasValue(egrPercent, dfList)
