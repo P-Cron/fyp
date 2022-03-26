@@ -48,7 +48,7 @@ def getDfsRpmIs0(dfList):
 
 
 # list of dataframes for different cars
-dfList = [accord1, accord2, accord3, accord4, accord5, accord6, accord7]
+dfList = [accord1, accord2, accord3, accord4, accord5, accord6, accord7, accord8]
 dfList0Rpms = getDfsRpmIs0(dfList)
 otherCars = []
 
@@ -72,8 +72,8 @@ if __name__ == "__main__":
     # plotValsMultDfsHasValue([intManPress], dfList)
     # printDescribes([fuelRailP, coolantTemp], dfList0Rpms)
     # plotValsMultDfsHasValue([fuelRailP], dfList0Rpms)
-    printDescribes(volEff, convertDfsColsToNums(dfList0Rpms, volEff))
-    plotValsMultDfsHasValue([volEff, rpm], convertDfsColsToNums(dfList0Rpms, volEff))
+    # printDescribes(volEff, convertDfsColsToNums(dfList0Rpms, volEff))
+    # plotValsMultDfsHasValue([volEff, rpm], convertDfsColsToNums(dfList0Rpms, volEff))
     # vol eff might be missing in some of the dfs
 
 

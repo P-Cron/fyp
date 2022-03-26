@@ -1,9 +1,6 @@
 import pandas as pd
 import vehicleProfile
 
-def main():
-    pass
-
 def testStore():
     print("Main starting!")
     df = pd.read_csv("torqueLogs\\trackLog-2022-Jan-23_19-26-14.csv")
