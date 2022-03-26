@@ -1,10 +1,9 @@
 import pandas as pd
 from matplotlib import pyplot as plt
-from pip import main
 
 from logFilesAsDfs import * 
 
-def plotOneValMultDfsOver0(valCheckList, dfList):   
+def plotValsMultDfsOver0(valCheckList, dfList):   
     count = 0
     for df in dfList:
         count += 1
@@ -14,7 +13,15 @@ def plotOneValMultDfsOver0(valCheckList, dfList):
     plt.legend(loc='upper left')
     plt.show()
 
-def plotOneValMultDfshasValue(valCheckList, dfList):   
+def convertDfsColsToNums(dfList, valCheck):
+    convertedDfs = []
+    for df in dfList:
+        df = (df[(df[valCheck] != '-')].copy())
+        df[valCheck]= pd.to_numeric(df[valCheck])
+        convertedDfs.append(df)
+    return convertedDfs
+
+def plotValsMultDfsHasValue(valCheckList, dfList):   
     # can check multiple values over multiple dataframes
     count = 0
     for df in dfList:
@@ -22,7 +29,7 @@ def plotOneValMultDfshasValue(valCheckList, dfList):
         for valCheck in valCheckList:
             df[(df[valCheck] != '-')][valCheck].plot(label='df'+str(count)+' - '+valCheck)
 
-    plt.legend(loc='upper left')
+    plt.legend(loc='upper right')
     plt.show()
 
 def printDescribes(valCheck, dfList):   
@@ -32,25 +39,42 @@ def printDescribes(valCheck, dfList):
         print(count)
         print(df[valCheck].describe())
 
-rpm = 'Engine RPM(rpm)'
+def getDfsRpmIs0(dfList):
+    zeroRpmDfs = []
+    for df in dfList:
+        dfZeroRpm = df[(df["Engine RPM(rpm)"] == 0)].copy()
+        zeroRpmDfs.append(dfZeroRpm)
+    return zeroRpmDfs
 
-boost = 'Turbo Boost & Vacuum Gauge(psi)'
 
+# list of dataframes for different cars
 dfList = [accord1, accord2, accord3, accord4, accord5, accord6, accord7]
+dfList0Rpms = getDfsRpmIs0(dfList)
 otherCars = []
 
+# dynamic variable names
+rpm = 'Engine RPM(rpm)'
+boost = 'Turbo Boost & Vacuum Gauge(psi)'
 imp = 'Intake Manifold Pressure(psi)'
-
 egrPercent = 'EGR Commanded(%)'
 fuelRailP = 'Fuel Rail Pressure(psi)'
 engLoad = 'Engine Load(%)' # no use
 intManPress = 'Intake Manifold Pressure(psi)' # no good and all cars seem to have the same
 mafRate= 'Mass Air Flow Rate(g/s)' # no good I think
+coolantTemp = 'Engine Coolant Temperature(°C)'
+volEff= 'Volumetric Efficiency (Calculated)(%)'
+
+
 if __name__ == "__main__":
-    # plotOneValMultDfsOver0(rpm, dfList)
+    # plotValsMultDfsOver0(rpm, dfList)
     # printDescribes(boost, dfList) # no good, boost is always changing
-    printDescribes(mafRate, dfList)
-    plotOneValMultDfshasValue([intManPress], dfList)
-    # print(accord2[egrPercent].quantile(0.25)) # can get quantile like that
+    # printDescribes(egrPercent, dfList)
+    # plotValsMultDfsHasValue([intManPress], dfList)
+    # printDescribes([fuelRailP, coolantTemp], dfList0Rpms)
+    # plotValsMultDfsHasValue([fuelRailP], dfList0Rpms)
+    printDescribes(volEff, convertDfsColsToNums(dfList0Rpms, volEff))
+    plotValsMultDfsHasValue([volEff, rpm], convertDfsColsToNums(dfList0Rpms, volEff))
+    # vol eff might be missing in some of the dfs
+
 
 

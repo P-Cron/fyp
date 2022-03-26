@@ -14,7 +14,7 @@ mar16LogsPathGolf3 = 'torqueLogs\\trackLog-2022-Mar-16_15-15-49Golf07Fixed3.csv'
 accord1 = pd.read_csv(jan16LogsPath)
 accord2 = pd.read_csv(jan23LogsPath)
 accord3 = pd.read_csv(jan27LogsPath)
-accord4 = pd.read_csv(jan29LogsPath, on_bad_lines='skip') # this csv seems to be corrupted
+accord4 = pd.read_csv(jan29LogsPath, on_bad_lines='skip') # this csv seems to be corrupted, now have fixed though
 accord5 = pd.read_csv(mar12LogsPath, on_bad_lines='skip')
 accord6 = pd.read_csv(mar13LogsPath)
 accord7 = pd.read_csv(mar16LogsPathAcc)
@@ -22,3 +22,5 @@ accord7 = pd.read_csv(mar16LogsPathAcc)
 golf1 = pd.read_csv(mar16LogsPathGolf1)
 golf2 = pd.read_csv(mar16LogsPathGolf2)
 golf3 = pd.read_csv(mar16LogsPathGolf3)
+
+corolla1 = pd.read_csv('torqueLogs\\trackLog-2022-Feb-12_10-53-51_Corolla06.csv')
