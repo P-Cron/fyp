@@ -5,3 +5,13 @@ STATIC_PIDS = ['0100', '011c obd standards vehicle conforms to', '0120', '0140',
     ]
 DYNAMIC_PIDS = ['Engine RPM(rpm)', 'Volumetric Efficiency (Calculated)(%)',  'EGR Commanded(%)']
 USEFUL_PIDS = STATIC_PIDS+DYNAMIC_PIDS # useful pids is just the two other pid lists combined
+
+RPM = 'Engine RPM(rpm)'
+TURBO_BOOST = 'Turbo Boost & Vacuum Gauge(psi)'
+IMP = 'Intake Manifold Pressure(psi)'
+EGR = 'EGR Commanded(%)'
+FUEL_RAIL = 'Fuel Rail Pressure(psi)'
+ENG_LOAD = 'Engine Load(%)' # no use
+MAF_RATE= 'Mass Air Flow Rate(g/s)' # no good I think
+COOL_TEMP = 'Engine Coolant Temperature(°C)'
+VOL_EFF= 'Volumetric Efficiency (Calculated)(%)'

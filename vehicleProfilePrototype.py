@@ -1,19 +1,10 @@
-from datetime import datetime
-import const
 import pickle
-
 class VehicleProfile():
-    def __init__(self, reg, dataFrame):
-        now = datetime.now()
-        date = now.strftime("%d-%m-%y-%H-%M")
+    def __init__(self, reg, date, dataFrame):
         self.profileName = reg+'_'+date
         self.profileDetails = {}
-        for pid in const.USEFUL_PIDS:
-            pidValue = processPid(pid, dataFrame) 
-            if pidValue:
-                # if returns a value then add it to the profile
-                self.profileDetails[pid] = pidValue # add values to dictionary for select pids
-
+        for pid in ['0100', '0120', '0140', '0903']:
+            self.profileDetails[pid] = dataFrame.tail(1)[pid].values[0] # add values to dictionary for select pids
 
     def __str__(self):
         return self.profileName + '\n' + str(self.profileDetails)
