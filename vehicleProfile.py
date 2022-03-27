@@ -1,14 +1,17 @@
 from datetime import datetime
 import const
 import pickle
+from processPid import processPid, getValidColumns
 
 class VehicleProfile():
     def __init__(self, reg, dataFrame):
         now = datetime.now()
-        date = now.strftime("%d-%m-%y-%H-%M")
+        date = now.strftime("%d-%m-%y-%H_%M")
         self.profileName = reg+'_'+date
         self.profileDetails = {}
-        for pid in const.USEFUL_PIDS:
+        pidsForVehicle = getValidColumns(dataFrame)
+        usablePids = list(set(pidsForVehicle) & set(const.USEFUL_PIDS)) # get intersection of pids vehicle supports and ones that have been set as usable
+        for pid in usablePids:
             pidValue = processPid(pid, dataFrame) 
             if pidValue:
                 # if returns a value then add it to the profile
