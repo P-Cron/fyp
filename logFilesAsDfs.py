@@ -13,7 +13,7 @@ mar16LogsPathGolf3 = 'torqueLogs\\trackLog-2022-Mar-16_15-15-49Golf07Fixed3.csv'
 
 def changeDfColumnName(df):
     df = df.rename(columns={'100': '0100', '120': '0120', '140': '0140', '160':'0160',
-     '900':'0900', 'service 09 pids supported': '0900',
+     '900':'0900',
      '903':'0903', '902': '0902', '903': '0903', '904': '0904', '905': '0905', '906':'0906',
      '907': '0907', '908': '0908', '909':'0909'})
     # need to rename columns as leading 0s are sometimes lost
@@ -27,6 +27,8 @@ accord5 = changeDfColumnName(pd.read_csv(mar12LogsPath, on_bad_lines='skip'))
 accord6 = changeDfColumnName(pd.read_csv(mar13LogsPath))
 accord7 = changeDfColumnName(pd.read_csv('torqueLogs\\trackLog-2022-Mar-16_10-00-53_Acccord08_Fixed1stHalfNotRunning.csv'))
 accord8 = changeDfColumnName(pd.read_csv('torqueLogs\\trackLog-2022-Mar-16_10-00-53_Accord08_fixed2ndHalf.csv'))
+accord9 = changeDfColumnName(pd.read_csv('torqueLogs\\trackLog-2022-Mar-28_10-47-35.csv'))
+
 
 
 golf1 = changeDfColumnName(pd.read_csv(mar16LogsPathGolf1))

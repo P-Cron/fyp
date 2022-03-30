@@ -2,7 +2,7 @@
 
 STATIC_PIDS = ['0100', '011c obd standards vehicle conforms to', '0120', '0140', '0160',
  '0900', '0901 vin message count', '0902', '0903', '0904', 
- '0905', '0906', '0907', '0908', '0909', '090A', '090B']
+ '0905', '0906', '0907', '0908', '0909', '090A', '090B', 'service 09 pids supported']
 DYNAMIC_PIDS = ['Engine RPM(rpm)',  'EGR Commanded(%)']
 # decided against using vol efficiency, it too often only gives '-' values when rpm is 0
 USEFUL_PIDS = STATIC_PIDS+DYNAMIC_PIDS # useful pids is just the two other pid lists combined

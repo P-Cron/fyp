@@ -7,7 +7,7 @@ def testStore():
     df = df.rename(columns={'100': '0100', '120': '0120', '903':'0903'})
 
     df2 = logFilesAsDfs.accord7
-    profile1 = vehicleProfile.VehicleProfile('08KY123Test', logFilesAsDfs.accord8)
+    profile1 = vehicleProfile.VehicleProfile('08KY123Test', logFilesAsDfs.accord9)
     print(profile1)
     # profile1.storeProfile() # not storing for now
 
