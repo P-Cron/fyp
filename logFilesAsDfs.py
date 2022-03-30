@@ -26,3 +26,16 @@ golf2 = pd.read_csv(mar16LogsPathGolf2)
 golf3 = pd.read_csv(mar16LogsPathGolf3)
 
 corolla1 = pd.read_csv('torqueLogs\\trackLog-2022-Feb-12_10-53-51_Corolla06.csv')
+
+allDfs = [accord1, accord2, accord3, accord4, accord5, accord6, accord7, accord8,
+golf1, golf2, golf3, 
+corolla1]
+
+def changeDfName(df):
+    df = df.rename(columns={'100': '0100', '120': '0120', '903':'0903', '900':'0900'})
+    # need to rename columns as leading 0s are sometimes lost
+    return df
+
+for df in allDfs:
+    df = changeDfName(df)
+    
