@@ -13,7 +13,7 @@ class VehicleProfile():
         pidsForVehicle = getValidColumns(dataFrame)
         usablePids = list(set(pidsForVehicle) & set(const.USEFUL_PIDS)) # get intersection of pids vehicle supports and ones that have been set as usable
         for pid in usablePids:
-            pidValue = processPid(pid, dataFrame, usablePids) 
+            pidValue = processPid(pid, dataFrame) 
             if pidValue:
                 # if returns a value then add it to the profile
                 self.profileDetails[pid] = pidValue # add values to dictionary for select pids

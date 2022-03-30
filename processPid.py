@@ -43,6 +43,10 @@ def processPid(pid, df):
             newDF = df[(df[const.RPM] == 0) & (df[const.VOL_EFF] != '-')].copy()
             # engine is not started. Often get - val so get rid of those rows
             # need to convert to numbers
+            if newDF.empty:
+                # occasionally not able to get the vol efficiency
+                # so return false, as the new df will be empty
+                return False
             newDF[pid] = pd.to_numeric(newDF[pid])
             if newDF[pid].median() is None:
                 return newDF[pid].mode()
