@@ -5,6 +5,7 @@ from processPid import processPid, getValidColumns
 
 class VehicleProfile():
     def __init__(self, reg, dataFrame):
+
         now = datetime.now()
         date = now.strftime("%d-%m-%y-%H_%M")
         self.profileName = reg+'_'+date
@@ -12,7 +13,7 @@ class VehicleProfile():
         pidsForVehicle = getValidColumns(dataFrame)
         usablePids = list(set(pidsForVehicle) & set(const.USEFUL_PIDS)) # get intersection of pids vehicle supports and ones that have been set as usable
         for pid in usablePids:
-            pidValue = processPid(pid, dataFrame) 
+            pidValue = processPid(pid, dataFrame, usablePids) 
             if pidValue:
                 # if returns a value then add it to the profile
                 self.profileDetails[pid] = pidValue # add values to dictionary for select pids

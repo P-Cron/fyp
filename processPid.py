@@ -3,7 +3,8 @@ import const
 
 def processPid(pid, df):
     # process pid correctly from dataframe
-    # rerurn false if no value, else return the value
+    # return false if no value, else return the value
+    newDF = df.copy()
     if pid in const.STATIC_PIDS:
         newDF = (df[(df[pid] != '-')].copy())
         if newDF.empty:
@@ -18,24 +19,34 @@ def processPid(pid, df):
         # only newer version of Python support "match" (Python's switch)
         if pid == const.RPM:
             # get where engine has heated up and remove rows where engine was not started
-            newDF = df[(df[const.COOL_TEMP] > 25) & (df[const.RPM] > 0)].copy()
+            for fixPid in [const.COOL_TEMP, const.RPM]:
+                    newDF = newDF[(newDF[fixPid] != '-')].copy()
+                    newDF[fixPid] = pd.to_numeric(newDF[fixPid])
+
+            newDF = newDF[(newDF[const.COOL_TEMP] > 25) & (newDF[const.RPM] > 0)].copy()
             return newDF[pid].median() # returns idling RPM
 
         elif pid == const.EGR:
-            newDF = (df[(df[const.RPM] > 0)].copy())
-            # engine is started
-            newDF[pid] = pd.to_numeric(newDF[pid]) # convert to numeric
-            return newDF[pid].quantile(.25)
+            newDF = (newDF[ (newDF[const.RPM] != '-') & (df[pid] != '-')].copy())
+            for fixPid in [const.EGR, const.RPM]:
+                    newDF = newDF[(newDF[fixPid] != '-')].copy()
+                    newDF[fixPid] = pd.to_numeric(newDF[fixPid])
+
+            newDF = (newDF[ (newDF[const.RPM] == 0)].copy())
+            # value is more stable before engine is started as it turns out
+
+            if pd.isna(newDF[pid].median()):
+                return newDF[pid].mode()
+            return newDF[pid].median()
         elif pid == const.VOL_EFF:
-            # testDF = df[(df[const.RPM] == 0)]
-            # testDf2 = df[df[const.VOL_EFF] != '-']
-            # print(testDF.describe())
-            # print(testDf2.describe())
+           
             newDF = df[(df[const.RPM] == 0) & (df[const.VOL_EFF] != '-')].copy()
             # engine is not started. Often get - val so get rid of those rows
             # need to convert to numbers
             newDF[pid] = pd.to_numeric(newDF[pid])
-            return newDF[pid].median()
+            if newDF[pid].median() is None:
+                return newDF[pid].mode()
+            return newDF[pid].median() # no need for else with return in this fashion
 
         else:
             # pid not handled
@@ -47,9 +58,6 @@ def processPid(pid, df):
 def getValidColumns(df):
     validColumns = []
     for columnName in df.columns:
-        # debugging
-        print(columnName, "value is:", df.tail(1)[columnName].values[0])
-        # print(columnName, df.tail(1)[columnName].values[0], ":equals:", "-")
-        if df.tail(1)[columnName].values[0]!="-":
+         if df.tail(1)[columnName].values[0]!="-":
             validColumns.append(columnName)
     return validColumns

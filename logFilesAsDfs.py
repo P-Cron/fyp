@@ -1,4 +1,5 @@
 import pandas as pd
+import const
 
 jan16LogsPath = 'torqueLogs\\trackLog-2022-Jan-16_17-42-53.csv'
 jan23LogsPath = 'torqueLogs\\trackLog-2022-Jan-23_19-26-14.csv'
