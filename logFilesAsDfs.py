@@ -31,12 +31,12 @@ accord9 = changeDfColumnName(pd.read_csv('torqueLogs\\trackLog-2022-Mar-28_10-47
 
 
 
-golf1 = changeDfColumnName(pd.read_csv(mar16LogsPathGolf1))
+golf1NotRunning = changeDfColumnName(pd.read_csv(mar16LogsPathGolf1))
 golf2 = changeDfColumnName(pd.read_csv(mar16LogsPathGolf2))
 golf3 = changeDfColumnName(pd.read_csv(mar16LogsPathGolf3))
 
 corolla1 = changeDfColumnName(pd.read_csv('torqueLogs\\trackLog-2022-Feb-12_10-53-51_Corolla06.csv'))
 
 allDfs = [accord1, accord2, accord3, accord4, accord5, accord6, accord7, accord8,
-golf1, golf2, golf3, 
+golf1NotRunning, golf2, golf3, 
 corolla1]

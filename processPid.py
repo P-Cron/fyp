@@ -27,13 +27,13 @@ def processPid(pid, df):
             return newDF[pid].median() # returns idling RPM
 
         elif pid == const.EGR:
-            newDF = (newDF[ (newDF[const.RPM] != '-') & (df[pid] != '-')].copy())
             for fixPid in [const.EGR, const.RPM]:
                     newDF = newDF[(newDF[fixPid] != '-')].copy()
                     newDF[fixPid] = pd.to_numeric(newDF[fixPid])
-
-            newDF = (newDF[ (newDF[const.RPM] == 0)].copy())
             # value is more stable before engine is started as it turns out
+            if not (newDF[ (newDF[const.RPM] == 0)].empty):
+                # if is not empty, take rows with 0 RPM as they are more stable
+                newDF = (newDF[ (newDF[const.RPM] == 0)].copy())
 
             if pd.isna(newDF[pid].median()):
                 return newDF[pid].mode()

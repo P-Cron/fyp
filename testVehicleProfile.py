@@ -9,7 +9,7 @@ def testStore():
     df2 = logFilesAsDfs.accord7
     profile1 = vehicleProfile.VehicleProfile('08KY123Test', logFilesAsDfs.accord9)
     print(profile1)
-    # profile1.storeProfile() # not storing for now
+    profile1.storeProfile() # not storing for now
 
 def testLoad():
     loadedProfile = vehicleProfile.loadProfile('pickledProfiles\\08KY12345_16-01-26.pkl')
@@ -20,7 +20,18 @@ def testCompare():
     loadedProfile2 = vehicleProfile.loadProfile('pickledProfiles\\08KY123Other_16-01-26.pkl')
     loadedProfile1.compareProfiles(loadedProfile2)
 
+def testMultiple(dfs):
+    count = 0
+    for df in dfs:
+        count += 1
+        profile = vehicleProfile.VehicleProfile('08KY123Test'+str(count), df)
+        print(profile)
+        profile.storeProfile()
+    
+
 
 if __name__ == "__main__":
     print("Main starting!")
-    testStore()
+    # testStore()
+    testMultiple([logFilesAsDfs.golf1NotRunning,
+    logFilesAsDfs.golf2, logFilesAsDfs.golf3])
