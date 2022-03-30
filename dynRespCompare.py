@@ -48,7 +48,7 @@ def getDfsRpmIs0(dfList):
 
 
 # list of dataframes for different cars
-dfList = [accord1, accord2, accord3, accord4, accord5, accord6, accord7, accord8]
+dfList = [accord1, accord2, accord3, accord4, accord5, accord6, accord7, accord8, accord9]
 dfList0Rpms = getDfsRpmIs0(dfList)
 otherCars = []
 
@@ -63,6 +63,7 @@ intManPress = 'Intake Manifold Pressure(psi)' # no good and all cars seem to hav
 mafRate= 'Mass Air Flow Rate(g/s)' # no good I think
 coolantTemp = 'Engine Coolant Temperature(°C)'
 volEff= 'Volumetric Efficiency (Calculated)(%)'
+obdSpeed = 'Speed (OBD)(mph)'
 
 
 if __name__ == "__main__":
@@ -75,4 +76,9 @@ if __name__ == "__main__":
     # printDescribes(volEff, convertDfsColsToNums(dfList0Rpms, volEff))
     # plotValsMultDfsHasValue([volEff, rpm], convertDfsColsToNums(dfList0Rpms, volEff))
     # vol eff might be missing in some of the dfs
+    # finding if turbo boost can be used, across logs it does not seem to be stable though it is stable in individual logs
+    # accord9[rpm] = accord9[rpm]/1100
+    # accord9[obdSpeed] = accord9[obdSpeed]/12
+    # accord9[coolantTemp] = accord9[coolantTemp]/10
+    # plotValsMultDfsHasValue([obdSpeed, rpm, boost, coolantTemp], [accord9])
     pass
