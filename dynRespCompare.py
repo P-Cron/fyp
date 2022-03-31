@@ -2,6 +2,7 @@ import pandas as pd
 from matplotlib import pyplot as plt
 
 from logFilesAsDfs import * 
+from checkWhichColumnsUsable import *
 
 def plotValsMultDfsOver0(valCheckList, dfList):   
     count = 0
@@ -32,6 +33,22 @@ def plotValsMultDfsHasValue(valCheckList, dfList):
     plt.legend(loc='upper right')
     plt.show()
 
+def plotValsShowVals(valCheckList, dfList):   
+    # can check multiple values over multiple dataframes
+    count = 0
+    fig, ax = plt.subplots(figsize=(12,8))
+    for df in dfList:
+        count += 1
+        for valCheck in valCheckList:
+            newDf = df[(df[valCheck] != '-')].copy() # get relevant rows where that val has a value
+            newDf.reset_index(drop=True, inplace=True) # reset index after dropping rows
+            newDf[valCheck].plot(label='df'+str(count)+' - '+valCheck)
+            for index in range(0, newDf.shape[0], 25):
+                ax.text(index, newDf[valCheck].values[index], newDf[valCheck].values[index], size=7)
+    plt.legend(loc='upper right')
+    
+    plt.show()
+
 def printDescribes(valCheck, dfList):   
     count = 0
     for df in dfList:
@@ -46,11 +63,20 @@ def getDfsRpmIs0(dfList):
         zeroRpmDfs.append(dfZeroRpm)
     return zeroRpmDfs
 
+def getDfsRunStationary(dfList):
+    runningDfs = []
+    for df in dfList:
+        runningDfs = df[((df["Engine RPM(rpm)"] > 0) & (df['Speed (OBD)(mph)'] == 0))].copy()
+        # engine running but not yet moving
+        runningDfs.append(runningDfs)
+    return runningDfs
+
 
 # list of dataframes for different cars
 dfList = [accord1, accord2, accord3, accord4, accord5, accord6, accord7, accord8, accord9]
 dfList0Rpms = getDfsRpmIs0(dfList)
-otherCars = []
+golfDfList = [golf2, golf3] # golf1 did not have the engine running so not using
+golfDfList0Rpms = getDfsRpmIs0(golfDfList)
 
 # dynamic variable names
 rpm = 'Engine RPM(rpm)'
@@ -81,4 +107,11 @@ if __name__ == "__main__":
     # accord9[obdSpeed] = accord9[obdSpeed]/12
     # accord9[coolantTemp] = accord9[coolantTemp]/10
     # plotValsMultDfsHasValue([obdSpeed, rpm, boost, coolantTemp], [accord9])
-    pass
+
+    # plotValsShowVals([rpm, boost, coolantTemp], [getDfsRunStationary([golf2])])
+    # boost looks good here for golf
+    plotValsShowVals([rpm, boost, coolantTemp], [getDfsRunStationary([accord9])])
+
+    
+    #usableCols = getValidColumns(golf2)
+    #print(usableCols)
