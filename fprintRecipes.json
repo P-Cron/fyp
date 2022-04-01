@@ -1,6 +1,14 @@
 {"08KY10099": {
-    "dynPids": ["Engine RPM(rpm)",  "EGR Commanded(%)"]
+    "dynPids": ["Engine RPM(rpm)",  "EGR Commanded(%)"], 
+    "tolerances": {"Engine RPM(rpm)": 4,
+          "EGR Commanded(%)": 0}
 },
 "07D22551": {
-    "dynPids": []
-}}
+    "dynPids": ["Miles Per Gallon(Long Term Average)(mpg)",
+        "Throttle Position(Manifold)(%)"
+    ],
+    "tolerances": {"Miles Per Gallon(Long Term Average)(mpg)": 4,
+        "Throttle Position(Manifold)(%)": 0.5
+       }
+    }
+}

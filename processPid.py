@@ -13,7 +13,7 @@ def processPid(pid, df):
             # take from the last row
             return newDF.tail(1)[pid].values[0]
 
-    elif pid in const.DYNAMIC_PIDS:
+    else:
         # so is a dynamic pid
         # would use a match statement instead of if elses but 
         # only newer version of Python support "match" (Python's switch)
@@ -52,12 +52,18 @@ def processPid(pid, df):
                 return newDF[pid].mode()
             return newDF[pid].median() # no need for else with return in this fashion
 
+        elif pid == const.MPG:
+            # does not especially matter when is taken
+            # might as well take the median however, ignore slight fluctuations
+            return newDF[pid].median()
+        elif pid == const.THROT_POS:
+            # want the throt pos when vehicle is not started
+            newDF = (newDF[ (newDF[const.RPM] == 0)].copy()) # get when car not yet started
+            # should be little variation but take the mean regardless
+            return newDF[pid].median()
         else:
             # pid not handled
             return False
-
-    else:
-        return False # pid not static or dynamic
 
 def getValidColumns(df):
     validColumns = []

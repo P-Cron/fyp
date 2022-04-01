@@ -91,7 +91,10 @@ mafRate= 'Mass Air Flow Rate(g/s)' # no good I think
 coolantTemp = 'Engine Coolant Temperature(°C)'
 volEff= 'Volumetric Efficiency (Calculated)(%)'
 obdSpeed = 'Speed (OBD)(mph)'
-
+fTrim1Lt = 'Fuel Trim Bank 1 Long Term(%)'
+mpg = 'Miles Per Gallon(Long Term Average)(mpg)'
+o2sensor = 'O2 Bank 1 Sensor 1 Wide Range Equivalence Ratio(λ)'
+throtPos = 'Throttle Position(Manifold)(%)'
 
 if __name__ == "__main__":
     # plotValsMultDfsOver0(rpm, dfList)
@@ -111,10 +114,6 @@ if __name__ == "__main__":
 
     # plotValsShowVals([rpm, boost, coolantTemp], [getDfsRunStationary([golf2])])
     # boost looks good here for golf
-    plotValsShowVals([rpm, boost, coolantTemp], getDfsRunStationary([golf2, golf3]))
-    statGolfs = getDfsRunStationary([golf2, golf3])
-    printDescribes([rpm, boost, coolantTemp], statGolfs)
-
-    
-    #usableCols = getValidColumns(golf2)
-    #print(usableCols)
+    # plotValsShowVals([rpm, boost, coolantTemp], getDfsRunStationary([golf2, golf3]))
+    # printDescribes([rpm, boost, coolantTemp], statGolfs)
+    pass

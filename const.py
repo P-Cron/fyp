@@ -3,9 +3,9 @@
 STATIC_PIDS = ['0100', '011c obd standards vehicle conforms to', '0120', '0140', '0160',
  '0900', '0901 vin message count', '0902', '0903', '0904', 
  '0905', '0906', '0907', '0908', '0909', '090A', '090B', 'service 09 pids supported']
-DYNAMIC_PIDS = ['Engine RPM(rpm)',  'EGR Commanded(%)']
+DEFAULT_DYN_PIDS = ['Engine RPM(rpm)',  'EGR Commanded(%)']
 # decided against using vol efficiency, it too often only gives '-' values when rpm is 0
-USEFUL_PIDS = STATIC_PIDS+DYNAMIC_PIDS # useful pids is just the two other pid lists combined
+DEFAULT_USEFUL_PIDS = STATIC_PIDS+DEFAULT_DYN_PIDS # useful pids is just the two other pid lists combined
 
 RPM = 'Engine RPM(rpm)'
 TURBO_BOOST = 'Turbo Boost & Vacuum Gauge(psi)'
@@ -16,3 +16,5 @@ ENG_LOAD = 'Engine Load(%)' # no use
 MAF_RATE= 'Mass Air Flow Rate(g/s)' # no good I think
 COOL_TEMP = 'Engine Coolant Temperature(°C)'
 VOL_EFF= 'Volumetric Efficiency (Calculated)(%)'
+MPG = 'Miles Per Gallon(Long Term Average)(mpg)'
+THROT_POS = 'Throttle Position(Manifold)(%)'

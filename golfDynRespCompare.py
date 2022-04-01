@@ -25,8 +25,22 @@ if __name__ == "__main__":
     # boost looks good here for golf, actuall too dependant on coolant really
     # plotValsShowVals([rpm, boost, coolantTemp], getDfsRunStationary([golf2, golf3]))
     # printDescribes([rpm, boost, coolantTemp], statGolfs)
-    for col in colsOfInterest:
-        printDescribes(col, golfDfList0Rpms+statGolfs)
+    # for col in colsOfInterest:
+    #     printDescribes(col, golfDfList0Rpms+statGolfs)
+    # printDescribes([fTrim1Lt, coolantTemp], golfDfList0Rpms)
+    # plotValsShowVals([fTrim1Lt, coolantTemp], [golf3])
+    # fTrim maybe not useful, is stable when the engine has heated up and then is turned off it seems
+    # becomes stabel once engine coolant reaches a certain temp
+
+    # now checking o2 sensor. Seems a bit too dependant on temp
+    # printDescribes([o2sensor, coolantTemp], golfDfList)
+    # plotValsShowVals([o2sensor, coolantTemp], golfDfList)
+
+    # checking throtPos
+    # printDescribes([throtPos, coolantTemp], golfDfList0Rpms) # seems good and stable while car not started
+    # printDescribes([throtPos, coolantTemp], statGolfs) # is less reliable when started. Better off with the car not running
+    # plotValsShowVals([throtPos, coolantTemp], statGolfs)
     
     #usableCols = getValidColumns(golf2)
     #print(usableCols)
+    pass

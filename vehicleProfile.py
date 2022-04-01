@@ -15,14 +15,14 @@ class VehicleProfile():
         if reg in recDict:
             # get the rec of the reg given
             dynPids = recDict[reg]['dynPids'] # and the specific list of pids as well
-            pass
+            possiblePids = const.STATIC_PIDS+dynPids
         else:
             # set to default from const file
-            pass
+            possiblePids = const.DEFAULT_USEFUL_PIDS
         self.profileName = reg+'_'+date
         self.profileDetails = {}
         pidsForVehicle = getValidColumns(dataFrame)
-        usablePids = list(set(pidsForVehicle) & set(const.USEFUL_PIDS)) # get intersection of pids vehicle supports and ones that have been set as usable
+        usablePids = list(set(pidsForVehicle) & set(possiblePids)) # get intersection of pids vehicle supports and ones that have been set as usable
         for pid in usablePids:
             pidValue = processPid(pid, dataFrame) 
             if pidValue:
