@@ -1,13 +1,24 @@
 from datetime import datetime
+import json
 import const
 import pickle
 from processPid import processPid, getValidColumns
 
 class VehicleProfile():
     def __init__(self, reg, dataFrame):
-
         now = datetime.now()
         date = now.strftime("%d-%m-%y-%H_%M")
+        infile = open("fprintRecipes.json", "r")
+        recipes = infile.read()
+        recDict = json.loads(recipes)
+        infile.close()
+        if reg in recDict:
+            # get the rec of the reg given
+            dynPids = recDict[reg]['dynPids'] # and the specific list of pids as well
+            pass
+        else:
+            # set to default from const file
+            pass
         self.profileName = reg+'_'+date
         self.profileDetails = {}
         pidsForVehicle = getValidColumns(dataFrame)

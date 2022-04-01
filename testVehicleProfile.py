@@ -7,7 +7,7 @@ def testStore():
     df = df.rename(columns={'100': '0100', '120': '0120', '903':'0903'})
 
     df2 = logFilesAsDfs.accord7
-    profile1 = vehicleProfile.VehicleProfile('08KY123Test', logFilesAsDfs.accord9)
+    profile1 = vehicleProfile.VehicleProfile('08KY10099', logFilesAsDfs.accord9)
     print(profile1)
     profile1.storeProfile() # not storing for now
 
@@ -32,6 +32,6 @@ def testMultiple(dfs):
 
 if __name__ == "__main__":
     print("Main starting!")
-    # testStore()
-    testMultiple([logFilesAsDfs.golf1NotRunning,
-    logFilesAsDfs.golf2, logFilesAsDfs.golf3])
+    testStore()
+    # testMultiple([logFilesAsDfs.golf1NotRunning,
+    #     logFilesAsDfs.golf2, logFilesAsDfs.golf3])
