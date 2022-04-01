@@ -1,5 +1,7 @@
 import pandas as pd
 from logFilesAsDfs import *
+# change \\ to / for ubuntu
+
 df = pd.read_csv("torqueLogs\\trackLog-2022-Jan-16_17-42-53.csv")
 jan16LogsPath = 'torqueLogs\\trackLog-2022-Jan-16_17-42-53.csv'
 jan23LogsPath = 'torqueLogs\\trackLog-2022-Jan-23_19-26-14.csv'

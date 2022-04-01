@@ -1,3 +1,4 @@
+from random import randint
 import pandas as pd
 from matplotlib import pyplot as plt
 
@@ -43,7 +44,7 @@ def plotValsShowVals(valCheckList, dfList):
             newDf = df[(df[valCheck] != '-')].copy() # get relevant rows where that val has a value
             newDf.reset_index(drop=True, inplace=True) # reset index after dropping rows
             newDf[valCheck].plot(label='df'+str(count)+' - '+valCheck)
-            for index in range(0, newDf.shape[0], 25):
+            for index in range(randint(0, 25), newDf.shape[0], 25):
                 ax.text(index, newDf[valCheck].values[index], newDf[valCheck].values[index], size=7)
     plt.legend(loc='upper right')
     
@@ -66,9 +67,9 @@ def getDfsRpmIs0(dfList):
 def getDfsRunStationary(dfList):
     runningDfs = []
     for df in dfList:
-        runningDfs = df[((df["Engine RPM(rpm)"] > 0) & (df['Speed (OBD)(mph)'] == 0))].copy()
+        runningDf = df[((df["Engine RPM(rpm)"] > 0) & (df['Speed (OBD)(mph)'] == 0))].copy()
         # engine running but not yet moving
-        runningDfs.append(runningDfs)
+        runningDfs.append(runningDf)
     return runningDfs
 
 
@@ -110,7 +111,9 @@ if __name__ == "__main__":
 
     # plotValsShowVals([rpm, boost, coolantTemp], [getDfsRunStationary([golf2])])
     # boost looks good here for golf
-    plotValsShowVals([rpm, boost, coolantTemp], [getDfsRunStationary([accord9])])
+    plotValsShowVals([rpm, boost, coolantTemp], getDfsRunStationary([golf2, golf3]))
+    statGolfs = getDfsRunStationary([golf2, golf3])
+    printDescribes([rpm, boost, coolantTemp], statGolfs)
 
     
     #usableCols = getValidColumns(golf2)
