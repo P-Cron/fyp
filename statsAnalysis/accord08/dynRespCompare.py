@@ -77,6 +77,14 @@ def getDfsRunStationary(dfList):
         runningDfs.append(runningDf)
     return runningDfs
 
+def getDfsScaledRpm(dfList):
+    dfs = []
+    for df in dfList:
+        df["Engine RPM(rpm)"] = df["Engine RPM(rpm)"]/100
+        # shrank df by 1000
+        dfs.append(df)
+    return dfs
+
 
 # list of dataframes for different cars
 dfList = [accord1, accord2, accord3, accord4, accord5, accord6, accord7, accord8, accord9]
