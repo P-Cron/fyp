@@ -1,6 +1,6 @@
 from datetime import datetime
 import json
-import const
+from constsAndHelpers import const
 import pickle
 from processPid import processPid, getValidColumns
 
@@ -15,7 +15,7 @@ class VehicleProfile():
         if reg in recDict:
             # get the rec of the reg given
             dynPids = recDict[reg]['dynPids'] # and the specific list of pids as well
-            possiblePids = const.STATIC_PIDS+dynPids
+            possiblePids = const.STATIC_PIDS + dynPids
         else:
             # set to default from const file
             possiblePids = const.DEFAULT_USEFUL_PIDS

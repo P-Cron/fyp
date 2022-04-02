@@ -1,5 +1,5 @@
 import pandas as pd
-import const
+import constsAndHelpers.const as const
 
 def processPid(pid, df):
     # process pid correctly from dataframe

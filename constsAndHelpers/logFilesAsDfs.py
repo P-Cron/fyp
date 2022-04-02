@@ -1,5 +1,4 @@
 import pandas as pd
-import const
 
 jan16LogsPath = 'torqueLogs\\trackLog-2022-Jan-16_17-42-53.csv'
 jan23LogsPath = 'torqueLogs\\trackLog-2022-Jan-23_19-26-14.csv'
@@ -22,12 +21,12 @@ def changeDfColumnName(df):
 accord1 = changeDfColumnName(pd.read_csv(jan16LogsPath))
 accord2 = changeDfColumnName(pd.read_csv(jan23LogsPath))
 accord3 = changeDfColumnName(pd.read_csv(jan27LogsPath))
-accord4 = changeDfColumnName(pd.read_csv(jan29LogsPath, on_bad_lines='skip')) # this csv seems to be corrupted, now have fixed though
-accord5 = changeDfColumnName(pd.read_csv(mar12LogsPath, on_bad_lines='skip'))
+accord4 = changeDfColumnName(pd.read_csv(jan29LogsPath)) # this csv seems to be corrupted, now have fixed though
+accord5 = changeDfColumnName(pd.read_csv(mar12LogsPath))
 accord6 = changeDfColumnName(pd.read_csv(mar13LogsPath))
-accord7 = changeDfColumnName(pd.read_csv('torqueLogs\\trackLog-2022-Mar-16_10-00-53_Acccord08_Fixed1stHalfNotRunning.csv'))
-accord8 = changeDfColumnName(pd.read_csv('torqueLogs\\trackLog-2022-Mar-16_10-00-53_Accord08_fixed2ndHalf.csv'))
-accord9 = changeDfColumnName(pd.read_csv('torqueLogs\\trackLog-2022-Mar-28_10-47-35.csv'))
+accord7 = changeDfColumnName(pd.read_csv('torqueLogs/trackLog-2022-Mar-16_10-00-53_Acccord08_Fixed1stHalfNotRunning.csv'))
+accord8 = changeDfColumnName(pd.read_csv('torqueLogs/trackLog-2022-Mar-16_10-00-53_Accord08_fixed2ndHalf.csv'))
+accord9 = changeDfColumnName(pd.read_csv('torqueLogs/trackLog-2022-Mar-28_10-47-35.csv'))
 
 
 
@@ -35,7 +34,7 @@ golf1NotRunning = changeDfColumnName(pd.read_csv(mar16LogsPathGolf1))
 golf2 = changeDfColumnName(pd.read_csv(mar16LogsPathGolf2))
 golf3 = changeDfColumnName(pd.read_csv(mar16LogsPathGolf3))
 
-corolla1 = changeDfColumnName(pd.read_csv('torqueLogs\\trackLog-2022-Feb-12_10-53-51_Corolla06.csv'))
+corolla1 = changeDfColumnName(pd.read_csv('torqueLogs/trackLog-2022-Feb-12_10-53-51_Corolla06.csv'))
 
 allDfs = [accord1, accord2, accord3, accord4, accord5, accord6, accord7, accord8,
 golf1NotRunning, golf2, golf3, 

@@ -1,4 +1,6 @@
-from dynRespCompare import *
+import sys
+sys.path.append(".")
+from statsAnalysis.accord08.dynRespCompare import *
 
 # all columns for golf which give a value
 colsOfInterest = ['CO₂ in g/km (Average)(g/km)', 

@@ -1,9 +1,14 @@
 from random import randint
 import pandas as pd
+import sys
+sys.path.append(".")
+
+
+from constsAndHelpers.logFilesAsDfs import *
+
 from matplotlib import pyplot as plt
 
-from logFilesAsDfs import * 
-from checkWhichColumnsUsable import *
+
 
 def plotValsMultDfsOver0(valCheckList, dfList):   
     count = 0
@@ -103,7 +108,7 @@ if __name__ == "__main__":
     # plotValsMultDfsHasValue([intManPress], dfList)
     # printDescribes([fuelRailP, coolantTemp], dfList0Rpms)
     # plotValsMultDfsHasValue([fuelRailP], dfList0Rpms)
-    # printDescribes(volEff, convertDfsColsToNums(dfList0Rpms, volEff))
+    printDescribes(volEff, convertDfsColsToNums(dfList0Rpms, volEff))
     # plotValsMultDfsHasValue([volEff, rpm], convertDfsColsToNums(dfList0Rpms, volEff))
     # vol eff might be missing in some of the dfs
     # finding if turbo boost can be used, across logs it does not seem to be stable though it is stable in individual logs
@@ -112,8 +117,4 @@ if __name__ == "__main__":
     # accord9[coolantTemp] = accord9[coolantTemp]/10
     # plotValsMultDfsHasValue([obdSpeed, rpm, boost, coolantTemp], [accord9])
 
-    # plotValsShowVals([rpm, boost, coolantTemp], [getDfsRunStationary([golf2])])
-    # boost looks good here for golf
-    # plotValsShowVals([rpm, boost, coolantTemp], getDfsRunStationary([golf2, golf3]))
-    # printDescribes([rpm, boost, coolantTemp], statGolfs)
     pass

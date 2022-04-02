@@ -3,7 +3,8 @@
 STATIC_PIDS = ['0100', '011c obd standards vehicle conforms to', '0120', '0140', '0160',
  '0900', '0901 vin message count', '0902', '0903', '0904', 
  '0905', '0906', '0907', '0908', '0909', '090A', '090B', 'service 09 pids supported']
-DEFAULT_DYN_PIDS = ['Engine RPM(rpm)',  'EGR Commanded(%)']
+DEFAULT_DYN_PIDS = ['Engine RPM(rpm)',  'EGR Commanded(%)', "Miles Per Gallon(Long Term Average)(mpg)",
+        "Throttle Position(Manifold)(%)"]
 # decided against using vol efficiency, it too often only gives '-' values when rpm is 0
 DEFAULT_USEFUL_PIDS = STATIC_PIDS+DEFAULT_DYN_PIDS # useful pids is just the two other pid lists combined
 
