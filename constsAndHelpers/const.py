@@ -7,6 +7,10 @@ DEFAULT_DYN_PIDS = ['Engine RPM(rpm)',  'EGR Commanded(%)', "Miles Per Gallon(Lo
         "Throttle Position(Manifold)(%)"]
 # decided against using vol efficiency, it too often only gives '-' values when rpm is 0
 DEFAULT_USEFUL_PIDS = STATIC_PIDS+DEFAULT_DYN_PIDS # useful pids is just the two other pid lists combined
+DEFAULT_TOLERANCES = {'Engine RPM(rpm)':20,
+  'EGR Commanded(%)': 3,
+   "Miles Per Gallon(Long Term Average)(mpg)": 10,
+        "Throttle Position(Manifold)(%)": 3}
 
 RPM = 'Engine RPM(rpm)'
 TURBO_BOOST = 'Turbo Boost & Vacuum Gauge(psi)'

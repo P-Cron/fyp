@@ -14,16 +14,15 @@ def testStore():
 
 
     print(profileGolf)
-    # profile1.storeProfile() # not storing for now
+    profileGolf.storeProfile() # not storing for now
 
 def testLoad():
     loadedProfile = vehicleProfileV2FullJson.loadProfile('pickledProfiles\\08KY12345_16-01-26.pkl')
     print(loadedProfile)
 
 def testCompare():
-    loadedProfile1 = vehicleProfileV2FullJson.loadProfile('pickledProfiles\\08KY12345_16-01-26.pkl')
-    loadedProfile2 = vehicleProfileV2FullJson.loadProfile('pickledProfiles\\08KY123Other_16-01-26.pkl')
-    loadedProfile1.compareProfiles(loadedProfile2)
+    profileGolf = vehicleProfileV2FullJson.VehicleProfile('07D22551', logFilesAsDfs.golf3)
+    profileGolf.compareProfiles()
 
 def testMultiple(dfs):
     count = 0
@@ -37,6 +36,7 @@ def testMultiple(dfs):
 
 if __name__ == "__main__":
     print("Main starting!")
-    testStore()
+    # testStore()
     # testMultiple([logFilesAsDfs.golf1NotRunning,
     #     logFilesAsDfs.golf2, logFilesAsDfs.golf3])
+    testCompare()
