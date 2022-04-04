@@ -66,6 +66,7 @@ def getDfsRpmIs0(dfList):
     zeroRpmDfs = []
     for df in dfList:
         dfZeroRpm = df[(df["Engine RPM(rpm)"] == 0)].copy()
+        dfZeroRpm.reset_index(drop=True, inplace=True)
         zeroRpmDfs.append(dfZeroRpm)
     return zeroRpmDfs
 
@@ -116,13 +117,16 @@ if __name__ == "__main__":
     # plotValsMultDfsHasValue([intManPress], dfList)
     # printDescribes([fuelRailP, coolantTemp], dfList0Rpms)
     # plotValsMultDfsHasValue([fuelRailP], dfList0Rpms)
-    printDescribes(volEff, convertDfsColsToNums(dfList0Rpms, volEff))
-    # plotValsMultDfsHasValue([volEff, rpm], convertDfsColsToNums(dfList0Rpms, volEff))
+    # printDescribes(volEff, convertDfsColsToNums(dfList0Rpms, volEff))
+    plotValsMultDfsHasValue([volEff, rpm], convertDfsColsToNums(dfList0Rpms, volEff))
     # vol eff might be missing in some of the dfs
     # finding if turbo boost can be used, across logs it does not seem to be stable though it is stable in individual logs
     # accord9[rpm] = accord9[rpm]/1100
     # accord9[obdSpeed] = accord9[obdSpeed]/12
     # accord9[coolantTemp] = accord9[coolantTemp]/10
     # plotValsMultDfsHasValue([obdSpeed, rpm, boost, coolantTemp], [accord9])
+    # plotValsMultDfsHasValue([rpm, coolantTemp], [accord8, accord9])
+    # plotValsMultDfsHasValue([rpm], [accord3, accord4, accord5, accord6, accord8, accord9])
+
 
     pass

@@ -1,7 +1,5 @@
 import sys
 sys.path.append(".")
-# sys.path.append("..")
-print(sys.path)
 from statsAnalysis.accord08.dynRespCompare import *
 
 # all columns for golf which give a value
@@ -43,7 +41,7 @@ if __name__ == "__main__":
     # checking throtPos
     # printDescribes([throtPos, coolantTemp], golfDfList0Rpms) # seems good and stable while car not started
     # printDescribes([throtPos, coolantTemp], statGolfs) # is less reliable when started. Better off with the car not running
-    plotValsShowVals([throtPos, coolantTemp, rpm], getDfsScaledRpm(statGolfs))
+    plotValsMultDfsHasValue([throtPos, rpm], golfDfList0Rpms+getDfsScaledRpm (statGolfs))
     
     #usableCols = getValidColumns(golf2)
     #print(usableCols)

@@ -1,5 +1,6 @@
 import pandas as pd
 import vehicleProfileV2FullJson
+import vehicleProfileV3FullJsonWFprint
 from constsAndHelpers import logFilesAsDfs
 
 
@@ -31,7 +32,10 @@ def testMultiple(dfs):
         profile = vehicleProfileV2FullJson.VehicleProfile('08KY123Test'+str(count), df)
         print(profile)
         profile.storeProfile()
-    
+
+def testGenFprint():
+    acc1 = vehicleProfileV3FullJsonWFprint.VehicleProfile("08KY10099", logFilesAsDfs.accord9)
+    acc1.genFprint()
 
 
 if __name__ == "__main__":
@@ -39,4 +43,5 @@ if __name__ == "__main__":
     # testStore()
     # testMultiple([logFilesAsDfs.golf1NotRunning,
     #     logFilesAsDfs.golf2, logFilesAsDfs.golf3])
-    testCompare()
+    # testCompare()
+    testGenFprint()
