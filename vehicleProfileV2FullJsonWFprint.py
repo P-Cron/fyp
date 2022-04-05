@@ -1,4 +1,5 @@
 from datetime import datetime
+import hashlib
 import json
 import os
 from constsAndHelpers import const
@@ -37,16 +38,19 @@ class VehicleProfile():
                 # if returns a value then add it to the profile
                 self.profileDetails[pid] = float(pidValue) # add values to dictionary for select pids
                 # must convert to int in order to be able to write as JSON
+        self.fPrint = self.genFprint()
+        # gen fPrint and set
+        self.profileDetails["fPrint"] = self.fPrint # store fingerprint in file
         
 
     def __str__(self):
         return self.profileName + '\n' + str(self.profileDetails)
 
     def storeProfile(self):
-        storeDir = 'v2JsonProfiles'
+        storeDir = 'v3JsonFprintProfiles'
         profile = {"id": self.reg,
         "profile": self.profileDetails}
-        outFile = open(storeDir + '\\'+self.profileName+'.json', 'w')
+        outFile = open(storeDir + '/'+self.profileName+'.json', 'w')
         json.dump(profile, outFile)
         outFile.close()
 
@@ -93,14 +97,14 @@ class VehicleProfile():
     def genFprint(self):
         # have static and dynamic portion to fprint
         dynamicVals = [self.profileDetails[pid] for pid in self.profileDetails if pid in self.dynPids]
-        # list of values for dynamic vars
+        dynamicVals.sort()
+        # list of values for dynamic vars, needs to be sorted to keep stable
         staticVals = [self.profileDetails[pid] for pid in self.profileDetails if pid not in self.dynPids]
-        dynValStr = str(dynamicVals)
-
-                    
-
-def loadProfile(pklFile):
-    inFile = open(pklFile, 'rb')
-    loadedProfile = pickle.load(inFile)
-    inFile.close()
-    return loadedProfile
+        staticVals.sort()
+        dynValStr = "".join([str(val) for val in dynamicVals]) # concat all in the list
+        # after converting everything to a string using list comprehension
+        staticValsStr = "".join([str(val) for val in staticVals])# same for static vals
+        statHexDig = hashlib.sha3_224(staticValsStr.encode()).hexdigest()
+        dynHexDig = hashlib.sha3_224(dynValStr.encode()).hexdigest()
+        fullFprint = statHexDig+"."+dynHexDig
+        return fullFprint                    

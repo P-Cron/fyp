@@ -5,7 +5,7 @@ from constsAndHelpers import logFilesAsDfs
 
 
 def testStore():
-    df = pd.read_csv("torqueLogs\\trackLog-2022-Mar-13_23-11-53_Accord08.csv")
+    df = pd.read_csv("torqueLogs/trackLog-2022-Mar-13_23-11-53_Accord08.csv")
     df = df.rename(columns={'100': '0100', '120': '0120', '903':'0903'})
 
     # df2 = logFilesAsDfs.accord7
@@ -15,10 +15,15 @@ def testStore():
 
 
     print(profileGolf)
-    profileGolf.storeProfile() # not storing for now
+    profileGolf.storeProfile()
+
+def testStoreV3():
+    profileAccord = vehicleProfileV2FullJson.VehicleProfile('08KY10099', logFilesAsDfs.accord9)
+    profileAccord.storeProfile()
+    print(profileAccord)
 
 def testLoad():
-    loadedProfile = vehicleProfileV2FullJson.loadProfile('pickledProfiles\\08KY12345_16-01-26.pkl')
+    loadedProfile = vehicleProfileV2FullJson.loadProfile('pickledProfiles/08KY12345_16-01-26.pkl')
     print(loadedProfile)
 
 def testCompare():
@@ -44,4 +49,5 @@ if __name__ == "__main__":
     # testMultiple([logFilesAsDfs.golf1NotRunning,
     #     logFilesAsDfs.golf2, logFilesAsDfs.golf3])
     # testCompare()
-    testGenFprint()
+    # testGenFprint()
+    testStoreV3()
