@@ -3,19 +3,17 @@ import vehicleProfileV1FullJson
 import vehicleProfileV2FullJsonWFprint
 from constsAndHelpers import logFilesAsDfs
 
+profileGolf1 = vehicleProfileV1FullJson.VehicleProfile('07D22551', logFilesAsDfs.golf2)
+profileGolf2 = vehicleProfileV1FullJson.VehicleProfile('07D22551', logFilesAsDfs.golf3)
+
 
 def testStore():
-    df = pd.read_csv("torqueLogs/trackLog-2022-Mar-13_23-11-53_Accord08.csv")
-    df = df.rename(columns={'100': '0100', '120': '0120', '903':'0903'})
-
-    # df2 = logFilesAsDfs.accord7
-    profileAccord = vehicleProfileV1FullJson.VehicleProfile('08KY10099', logFilesAsDfs.accord9)
-    # profileGolf = vehicleProfileV1FullJson.VehicleProfile('07D22551', logFilesAsDfs.golf2)
-    profileGolf = vehicleProfileV1FullJson.VehicleProfile('07D22551', logFilesAsDfs.golf3)
 
 
-    print(profileGolf)
-    profileGolf.storeProfile()
+    print(profileGolf1)
+    profileGolf1.storeProfile()
+    print(profileGolf2)
+    profileGolf2.storeProfile()
 
 
 def testLoad():
@@ -23,8 +21,7 @@ def testLoad():
     print(loadedProfile)
 
 def testCompare():
-    profileGolf = vehicleProfileV1FullJson.VehicleProfile('07D22551', logFilesAsDfs.golf3)
-    profileGolf.compareProfiles()
+    profileGolf1.compareProfiles()
 
 def testMultiple(dfs):
     count = 0
@@ -34,10 +31,14 @@ def testMultiple(dfs):
         print(profile)
         profile.storeProfile()
 
-
-if __name__ == "__main__":
+def main():
     print("Main starting!")
     # testStore()
     # testMultiple([logFilesAsDfs.golf1NotRunning,
     #     logFilesAsDfs.golf2, logFilesAsDfs.golf3])
-    # testCompare()
+    print("----- testing compare -----")
+    testCompare()
+
+if __name__ == "__main__":
+    main()
+    

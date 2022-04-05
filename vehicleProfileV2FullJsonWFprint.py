@@ -8,7 +8,7 @@ from processPid import processPid, getValidColumns
 class VehicleProfile():
     def __init__(self, reg, dataFrame):
         now = datetime.now()
-        date = now.strftime("%d-%m-%y-%H_%M")
+        date = now.strftime("%d-%m-%y-%H_%M%S.%f")[:-3]
         infile = open("fprintRecipes.json", "r")
         recDict = json.loads(infile.read())
         infile.close()
@@ -45,7 +45,7 @@ class VehicleProfile():
         return self.profileName + '\n' + str(self.profileDetails) + '\nFingerprint: ' + self.fPrint
 
     def storeProfile(self):
-        storeDir = 'v3JsonFprintProfiles'
+        storeDir = 'v2JsonFprintProfiles'
         profile = {"id": self.reg,
         "profile": self.profileDetails,
         "fPrint": self.fPrint}
@@ -134,16 +134,20 @@ class VehicleProfile():
         else:
             print("Not generating a new fingerprint. Failed to bring dynamic values to correct base values")
 
-    def compareFprints(self, otherProf):
+    def compareFprints(self, pathToProfile):
+        infile = open(pathToProfile, "r")
+        otherProf = json.loads(infile.read())
+        infile.close()
         # self.fPrint
         matching = True
-        if self.fPrint.split(".")[0] != otherProf.fPrint.split(".")[0]:
+        if self.fPrint.split(".")[0] != otherProf["fPrint"].split(".")[0]:
             matching = False
             print("static portion of fingerprint does not match")
             # means first part of fprint does not match
-            if self.fPrint.split(".")[1] != otherProf.fPrint.split(".")[1]:
-                # means 2ndPart does not match
-                matching = False
-                print("dynamic portion of fingerprint does not match")
-
+        if self.fPrint.split(".")[1] != otherProf["fPrint"].split(".")[1]:
+            # means 2ndPart does not match
+            matching = False
+            print("dynamic portion of fingerprint does not match")
+        if matching:
+            print("fingerprints match")
         return matching

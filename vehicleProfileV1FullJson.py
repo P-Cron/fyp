@@ -8,7 +8,7 @@ from processPid import processPid, getValidColumns
 class VehicleProfile():
     def __init__(self, reg, dataFrame):
         now = datetime.now()
-        date = now.strftime("%d-%m-%y-%H_%M")
+        date = now.strftime("%d-%m-%y-%H_%M%S.%f")[:-3]
         infile = open("fprintRecipes.json", "r")
         recDict = json.loads(infile.read())
         infile.close()
@@ -52,7 +52,7 @@ class VehicleProfile():
 
     def findProfilesSameId(self):
         matchingProfiles = []
-        with os.scandir("v2JsonProfiles") as profiles:
+        with os.scandir("v1JsonProfiles") as profiles:
             for profileEntry in profiles:
                 infile = open(profileEntry.path, "r")
                 profileDict = json.loads(infile.read())
@@ -69,6 +69,7 @@ class VehicleProfile():
             print("{} matching profiles".format(len(matchProfs)))
         profNum = 0
         for prof in matchProfs:
+            entireProfMatch = True
             profNum += 1
             print("profile number {}".format(profNum))
             for pid in self.profileDetails.keys():
@@ -78,17 +79,16 @@ class VehicleProfile():
                     match = ((self.profileDetails[pid] >= prof["profile"][pid]-self.toleranceDict[pid]) and 
                     (prof["profile"][pid]+self.toleranceDict[pid] >=self.profileDetails[pid]))
                
-                     # if self.profileDetails[pid] not in \
-                    #     range(prof["profile"][pid]-self.toleranceDict[pid], prof["profile"][pid]-self.toleranceDict[pid]) :
-                    #     print(pid+' differs!')
-                    # else:
-                    #     print(pid+' matches')
                 else:
                     match = (self.profileDetails[pid] == prof["profile"][pid]) # boolean
-                if match:
-                    print(pid+' matches')
-                else:
+                if not match:
                     print(pid+' differs!')
+                    entireProfMatch = False
+            if entireProfMatch:
+                print("profiles match")
+            else:
+                print("profiles do not match!")
+            
                     
 
 def loadProfile(pklFile):

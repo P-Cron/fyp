@@ -2,18 +2,25 @@ import vehicleProfileV1FullJson
 import vehicleProfileV2FullJsonWFprint
 from constsAndHelpers import logFilesAsDfs
 
+acc10 = vehicleProfileV2FullJsonWFprint.VehicleProfile('08KY10099', logFilesAsDfs.accord10)
+acc9 = vehicleProfileV2FullJsonWFprint.VehicleProfile('08KY10099', logFilesAsDfs.accord9)
+
 def testStoreV2():
+    acc9 = vehicleProfileV2FullJsonWFprint.VehicleProfile('08KY10099', logFilesAsDfs.accord9)
+    # acc10.storeProfile()
+    # print(acc10)
+    acc9.storeProfile()
+    print(acc9)
+
+def testCompareFprint():
     acc10 = vehicleProfileV2FullJsonWFprint.VehicleProfile('08KY10099', logFilesAsDfs.accord10)
     print(acc10)
+    acc10.compareFprints('v2JsonFprintProfiles\\08KY10099_05-04-22-22_5220.318.json')
+    print("----- generating new fingerprint from previous -----")
+    acc10.bringValsToBaseAndGenFprint('v2JsonFprintProfiles\\08KY10099_05-04-22-22_5220.318.json')
+    print(acc10)
+    acc10.compareFprints('v2JsonFprintProfiles\\08KY10099_05-04-22-22_5220.318.json')
 
-def testCompare():
-    profileAcc2 = vehicleProfileV2FullJsonWFprint.VehicleProfile('08KY10099', logFilesAsDfs.accord6)
-    profileAccord = vehicleProfileV2FullJsonWFprint.VehicleProfile('08KY10099', logFilesAsDfs.accord9)
-
-    profileAcc2.compareFprints(profileAccord)
-    profileAcc2.bringValsToBaseAndGenFprint('v1JsonProfiles/08KY10099_05-04-22-14_56.json')
-    print(profileAcc2)
-    profileAcc2.compareFprints(profileAccord)
 
 def testGenFprint():
     acc1 = vehicleProfileV2FullJsonWFprint.VehicleProfile("08KY10099", logFilesAsDfs.accord9)
@@ -26,12 +33,14 @@ def testGenFprintOfOther():
     print(profileAcc2)
     profileAcc2.storeProfile()
 
-if __name__ == "__main__":
-    print("Main starting!")
-    # testStore()
+def main():
+    print("----- testing v2 -----")    
     # testMultiple([logFilesAsDfs.golf1NotRunning,
     #     logFilesAsDfs.golf2, logFilesAsDfs.golf3])
-    # testCompare()
+    testCompareFprint()
     # testGenFprint()
-    testStoreV2()
+    # testStoreV2()
     # testGenFprintOfOther()
+
+if __name__ == "__main__":
+    main()

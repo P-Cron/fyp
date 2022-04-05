@@ -1,6 +1,10 @@
 import testVehicleProfileV1
 import testVehicleProfileV2 
 
-if __name__ == "__main__":
+def main():
+    testVehicleProfileV1.main() # run store first, then manually change a val e.g. throttle pos
     
-    pass
+    testVehicleProfileV2.main()
+if __name__ == "__main__":
+    main()
+
