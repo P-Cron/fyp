@@ -42,7 +42,7 @@ class VehicleProfile():
         
 
     def __str__(self):
-        return self.profileName + '\n' + str(self.profileDetails)
+        return self.profileName + '\n' + str(self.profileDetails) + '\nFingerprint: ' + self.fPrint
 
     def storeProfile(self):
         storeDir = 'v3JsonFprintProfiles'
@@ -108,7 +108,42 @@ class VehicleProfile():
         fullFprint = statHexDig+"."+dynHexDig
         return fullFprint    
 
-    def genFprintOffOtherProf(self, profile, idOfOther):
-        # generate a fingerprint based off of an existing one
-        # use the other values and the range to bring dynamic values to a stable base
-        pass
+    def tryBringDynValsToOther(self, pathToProfile):
+        # bring dynamic values to a stable base from another profile
+        # return true of False depending on successful or not
+        infile = open(pathToProfile, "r")
+        otherProf = json.loads(infile.read())
+        infile.close()
+        # already have dict of tolerances
+        success = True # true by default
+        for pid in self.dynPids:
+            inRange = ((self.profileDetails[pid] >= otherProf["profile"][pid]-self.toleranceDict[pid]) and 
+                    (otherProf["profile"][pid]+self.toleranceDict[pid] >=self.profileDetails[pid]))
+            if inRange:
+                self.profileDetails[pid] = otherProf["profile"][pid]# set to the previous val
+            else:
+                print("{} is out of range. \n Correct val: {}\nGiven val: {}\nRange: {}".format(
+                    pid, otherProf["profile"][pid], self.toleranceDict[pid]))
+                success = False
+        return success
+
+    def bringValsToBaseAndGenFprint(self, pathToProfile):
+        if self.tryBringDynValsToOther(pathToProfile):
+            # successfully brought to base vals
+            self.fPrint = self.genFprint(self.profileDetails) # generate a new fprint
+        else:
+            print("Not generating a new fingerprint. Failed to bring dynamic values to correct base values")
+
+    def compareFprints(self, otherProf):
+        # self.fPrint
+        matching = True
+        if self.fPrint.split(".")[0] != otherProf.fPrint.split(".")[0]:
+            matching = False
+            print("static portion of fingerprint does not match")
+            # means first part of fprint does not match
+            if self.fPrint.split(".")[1] != otherProf.fPrint.split(".")[1]:
+                # means 2ndPart does not match
+                matching = False
+                print("dynamic portion of fingerprint does not match")
+
+        return matching

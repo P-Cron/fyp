@@ -27,6 +27,7 @@ accord6 = changeDfColumnName(pd.read_csv(mar13LogsPath))
 accord7 = changeDfColumnName(pd.read_csv('torqueLogs/trackLog-2022-Mar-16_10-00-53_Acccord08_Fixed1stHalfNotRunning.csv'))
 accord8 = changeDfColumnName(pd.read_csv('torqueLogs/trackLog-2022-Mar-16_10-00-53_Accord08_fixed2ndHalf.csv'))
 accord9 = changeDfColumnName(pd.read_csv('torqueLogs/trackLog-2022-Mar-28_10-47-35.csv'))
+accord10 = changeDfColumnName(pd.read_csv('torqueLogs/trackLog-2022-Mar-31_21-24-53.csv'))
 
 
 

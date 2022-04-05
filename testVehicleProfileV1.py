@@ -17,10 +17,6 @@ def testStore():
     print(profileGolf)
     profileGolf.storeProfile()
 
-def testStoreV2():
-    profileAccord = vehicleProfileV2FullJsonWFprint.VehicleProfile('08KY10099', logFilesAsDfs.accord9)
-    profileAccord.storeProfile()
-    print(profileAccord)
 
 def testLoad():
     loadedProfile = vehicleProfileV1FullJson.loadProfile('pickledProfiles/08KY12345_16-01-26.pkl')
@@ -50,4 +46,3 @@ if __name__ == "__main__":
     #     logFilesAsDfs.golf2, logFilesAsDfs.golf3])
     # testCompare()
     # testGenFprint()
-    testStoreV2()

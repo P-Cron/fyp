@@ -1,1 +1,12 @@
-{"id": "08KY10099", "profile": {"0903": 3.0, "EGR Commanded(%)": 4.70588255, "Engine RPM(rpm)": 821.0, "0120": 2685927424.0, "0900": 255.0, "0100": 2554003456.0, "011c obd standards vehicle conforms to": 6.0}}
+{
+    "id": "08KY10099",
+    "profile": {
+        "0903": 3.0,
+        "EGR Commanded(%)": 4.70588255,
+        "Engine RPM(rpm)": 821.0,
+        "0120": 2685927424.0,
+        "0900": 255.0,
+        "0100": 2554003456.0,
+        "011c obd standards vehicle conforms to": 6.0
+    }
+}
