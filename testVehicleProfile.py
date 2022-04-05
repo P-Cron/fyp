@@ -1,6 +1,6 @@
 import pandas as pd
-import vehicleProfileV2FullJson
-import vehicleProfileV3FullJsonWFprint
+import vehicleProfileV1FullJson
+import vehicleProfileV2FullJsonWFprint
 from constsAndHelpers import logFilesAsDfs
 
 
@@ -9,37 +9,37 @@ def testStore():
     df = df.rename(columns={'100': '0100', '120': '0120', '903':'0903'})
 
     # df2 = logFilesAsDfs.accord7
-    profileAccord = vehicleProfileV2FullJson.VehicleProfile('08KY10099', logFilesAsDfs.accord9)
-    # profileGolf = vehicleProfileV2FullJson.VehicleProfile('07D22551', logFilesAsDfs.golf2)
-    profileGolf = vehicleProfileV2FullJson.VehicleProfile('07D22551', logFilesAsDfs.golf3)
+    profileAccord = vehicleProfileV1FullJson.VehicleProfile('08KY10099', logFilesAsDfs.accord9)
+    # profileGolf = vehicleProfileV1FullJson.VehicleProfile('07D22551', logFilesAsDfs.golf2)
+    profileGolf = vehicleProfileV1FullJson.VehicleProfile('07D22551', logFilesAsDfs.golf3)
 
 
     print(profileGolf)
     profileGolf.storeProfile()
 
-def testStoreV3():
-    profileAccord = vehicleProfileV2FullJson.VehicleProfile('08KY10099', logFilesAsDfs.accord9)
+def testStoreV2():
+    profileAccord = vehicleProfileV2FullJsonWFprint.VehicleProfile('08KY10099', logFilesAsDfs.accord9)
     profileAccord.storeProfile()
     print(profileAccord)
 
 def testLoad():
-    loadedProfile = vehicleProfileV2FullJson.loadProfile('pickledProfiles/08KY12345_16-01-26.pkl')
+    loadedProfile = vehicleProfileV1FullJson.loadProfile('pickledProfiles/08KY12345_16-01-26.pkl')
     print(loadedProfile)
 
 def testCompare():
-    profileGolf = vehicleProfileV2FullJson.VehicleProfile('07D22551', logFilesAsDfs.golf3)
+    profileGolf = vehicleProfileV1FullJson.VehicleProfile('07D22551', logFilesAsDfs.golf3)
     profileGolf.compareProfiles()
 
 def testMultiple(dfs):
     count = 0
     for df in dfs:
         count += 1
-        profile = vehicleProfileV2FullJson.VehicleProfile('08KY123Test'+str(count), df)
+        profile = vehicleProfileV1FullJson.VehicleProfile('08KY123Test'+str(count), df)
         print(profile)
         profile.storeProfile()
 
 def testGenFprint():
-    acc1 = vehicleProfileV3FullJsonWFprint.VehicleProfile("08KY10099", logFilesAsDfs.accord9)
+    acc1 = vehicleProfileV2FullJsonWFprint.VehicleProfile("08KY10099", logFilesAsDfs.accord9)
     acc1.genFprint()
 
 
@@ -50,4 +50,4 @@ if __name__ == "__main__":
     #     logFilesAsDfs.golf2, logFilesAsDfs.golf3])
     # testCompare()
     # testGenFprint()
-    testStoreV3()
+    testStoreV2()

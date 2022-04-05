@@ -43,7 +43,7 @@ class VehicleProfile():
         return self.profileName + '\n' + str(self.profileDetails)
 
     def storeProfile(self):
-        storeDir = 'v2JsonProfiles'
+        storeDir = 'v1JsonProfiles'
         profile = {"id": self.reg,
         "profile": self.profileDetails}
         outFile = open(storeDir + '\\'+self.profileName+'.json', 'w')

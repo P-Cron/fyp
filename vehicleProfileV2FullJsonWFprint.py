@@ -3,7 +3,6 @@ import hashlib
 import json
 import os
 from constsAndHelpers import const
-import pickle
 from processPid import processPid, getValidColumns
 
 class VehicleProfile():
@@ -38,9 +37,8 @@ class VehicleProfile():
                 # if returns a value then add it to the profile
                 self.profileDetails[pid] = float(pidValue) # add values to dictionary for select pids
                 # must convert to int in order to be able to write as JSON
-        self.fPrint = self.genFprint()
+        self.fPrint = self.genFprint(self.profileDetails)
         # gen fPrint and set
-        self.profileDetails["fPrint"] = self.fPrint # store fingerprint in file
         
 
     def __str__(self):
@@ -49,7 +47,8 @@ class VehicleProfile():
     def storeProfile(self):
         storeDir = 'v3JsonFprintProfiles'
         profile = {"id": self.reg,
-        "profile": self.profileDetails}
+        "profile": self.profileDetails,
+        "fPrint": self.fPrint}
         outFile = open(storeDir + '/'+self.profileName+'.json', 'w')
         json.dump(profile, outFile)
         outFile.close()
@@ -94,12 +93,12 @@ class VehicleProfile():
                 else:
                     print(pid+' differs!')
 
-    def genFprint(self):
+    def genFprint(self, profile):
         # have static and dynamic portion to fprint
-        dynamicVals = [self.profileDetails[pid] for pid in self.profileDetails if pid in self.dynPids]
+        dynamicVals = [profile[pid] for pid in profile if pid in self.dynPids]
         dynamicVals.sort()
         # list of values for dynamic vars, needs to be sorted to keep stable
-        staticVals = [self.profileDetails[pid] for pid in self.profileDetails if pid not in self.dynPids]
+        staticVals = [profile[pid] for pid in profile if pid not in self.dynPids]
         staticVals.sort()
         dynValStr = "".join([str(val) for val in dynamicVals]) # concat all in the list
         # after converting everything to a string using list comprehension
@@ -107,4 +106,9 @@ class VehicleProfile():
         statHexDig = hashlib.sha3_224(staticValsStr.encode()).hexdigest()
         dynHexDig = hashlib.sha3_224(dynValStr.encode()).hexdigest()
         fullFprint = statHexDig+"."+dynHexDig
-        return fullFprint                    
+        return fullFprint    
+
+    def genFprintOffOtherProf(self, profile, idOfOther):
+        # generate a fingerprint based off of an existing one
+        # use the other values and the range to bring dynamic values to a stable base
+        pass
