@@ -34,10 +34,6 @@ def testMultiple(dfs):
         print(profile)
         profile.storeProfile()
 
-def testGenFprint():
-    acc1 = vehicleProfileV2FullJsonWFprint.VehicleProfile("08KY10099", logFilesAsDfs.accord9)
-    acc1.genFprint()
-
 
 if __name__ == "__main__":
     print("Main starting!")
@@ -45,4 +41,3 @@ if __name__ == "__main__":
     # testMultiple([logFilesAsDfs.golf1NotRunning,
     #     logFilesAsDfs.golf2, logFilesAsDfs.golf3])
     # testCompare()
-    # testGenFprint()
