@@ -2,7 +2,7 @@ from datetime import datetime
 import hashlib
 import json
 import os
-from constsAndHelpers import const
+from constsAndHelpers import const, fixedRangesToFloor
 from processPid import processPid, getValidColumns
 
 class VehicleProfile():
@@ -105,27 +105,16 @@ class VehicleProfile():
         fullFprint = statHexDig+"."+dynHexDig
         return fullFprint    
 
-    def tryBringDynValsToOther(self, pathToProfile):
-        # bring dynamic values to a stable base from another profile
-        # return true of False depending on successful or not
-        infile = open(pathToProfile, "r")
-        otherProf = json.loads(infile.read())
-        infile.close()
-        # already have dict of tolerances
-        success = True # true by default
+    def bringDynValsToFixedBase(self):
+        # bring dynamic values to a stable base using fixed ranges
+        # already have dict of fixed ranges
         for pid in self.dynPids:
-            inRange = ((self.profileDetails[pid] >= otherProf["profile"][pid]-self.toleranceDict[pid]) and 
-                    (otherProf["profile"][pid]+self.toleranceDict[pid] >=self.profileDetails[pid]))
-            if inRange:
-                self.profileDetails[pid] = otherProf["profile"][pid]# set to the previous val
-            else:
-                print("{} is out of range. \n Correct val: {}\nGiven val: {}\nRange: {}".format(
-                    pid, otherProf["profile"][pid], self.toleranceDict[pid]))
-                success = False
-        return success
+            baseVal = fixedRangesToFloor.find_le(self.fixedRanges[pid], self.profileDetails[pid])
+            self.profileDetails[pid] = baseVal
+        return True
 
     def bringValsToBaseAndGenFprint(self, pathToProfile):
-        if self.tryBringDynValsToOther(pathToProfile):
+        if self.tryBringDynVbringDynValsToFixedBasealsToOther(pathToProfile):
             # successfully brought to base vals
             self.fPrint = self.genFprint(self.profileDetails) # generate a new fprint
         else:
