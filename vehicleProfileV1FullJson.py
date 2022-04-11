@@ -2,7 +2,6 @@ from datetime import datetime
 import json
 import os
 from constsAndHelpers import const
-import pickle
 from processPid import processPid, getValidColumns
 
 class VehicleProfile():
@@ -89,10 +88,3 @@ class VehicleProfile():
             else:
                 print("profiles do not match!")
             
-                    
-
-def loadProfile(pklFile):
-    inFile = open(pklFile, 'rb')
-    loadedProfile = pickle.load(inFile)
-    inFile.close()
-    return loadedProfile
