@@ -1,6 +1,5 @@
 import pandas as pd
-from fypPythonTorqueData.constsAndHelpers.logFilesAsDfs import *
-# change \\ to / for ubuntu
+from constsAndHelpers.logFilesAsDfs import *
 
 df = pd.read_csv("torqueLogs\\trackLog-2022-Jan-16_17-42-53.csv")
 jan16LogsPath = 'torqueLogs\\trackLog-2022-Jan-16_17-42-53.csv'

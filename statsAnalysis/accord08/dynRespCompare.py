@@ -109,6 +109,7 @@ fTrim1Lt = 'Fuel Trim Bank 1 Long Term(%)'
 mpg = 'Miles Per Gallon(Long Term Average)(mpg)'
 o2sensor = 'O2 Bank 1 Sensor 1 Wide Range Equivalence Ratio(λ)'
 throtPos = 'Throttle Position(Manifold)(%)'
+egrErr = 'EGR Error(%)'
 
 if __name__ == "__main__":
     # plotValsMultDfsOver0(rpm, dfList)

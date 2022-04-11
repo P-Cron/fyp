@@ -24,7 +24,7 @@ def processPid(pid, df):
                     newDF[fixPid] = pd.to_numeric(newDF[fixPid])
 
             newDF = newDF[(newDF[const.COOL_TEMP] > 25) & (newDF[const.RPM] > 0)].copy()
-            return newDF[pid].median() # returns idling RPM
+            return newDF[pid].median() # returns idling RPM, assuming vehicle had been idling for a long period
 
         elif pid == const.EGR:
             for fixPid in [const.EGR, const.RPM]:

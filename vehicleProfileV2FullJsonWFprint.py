@@ -150,3 +150,4 @@ class VehicleProfile():
         if matching:
             print("fingerprints match")
         return matching
+        
