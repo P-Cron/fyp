@@ -23,3 +23,9 @@ COOL_TEMP = 'Engine Coolant Temperature(°C)'
 VOL_EFF= 'Volumetric Efficiency (Calculated)(%)'
 MPG = 'Miles Per Gallon(Long Term Average)(mpg)'
 THROT_POS = 'Throttle Position(Manifold)(%)'
+
+FIXED_RANGES = {'Engine RPM(rpm)':[i for i in range(500, 1500, 25)], # intervals of 25 for RPM
+  'EGR Commanded(%)': [i for i in range(0, 30, 1)],
+   "Miles Per Gallon(Long Term Average)(mpg)": [i for i in range(10, 70, 10)],
+        "Throttle Position(Manifold)(%)": [i for i in range(5, 50, 1)] # increments of 1
+        }
