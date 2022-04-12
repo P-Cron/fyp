@@ -1,6 +1,5 @@
 import pandas as pd
 import vehicleProfileV1FullJson
-import vehicleProfileV2FullJsonWFprint
 from constsAndHelpers import logFilesAsDfs
 
 profileGolf1 = vehicleProfileV1FullJson.VehicleProfile('07D22551', logFilesAsDfs.golf2)
@@ -16,10 +15,6 @@ def testStore():
     profileGolf2.storeProfile()
 
 
-def testLoad():
-    loadedProfile = vehicleProfileV1FullJson.loadProfile('pickledProfiles/08KY12345_16-01-26.pkl')
-    print(loadedProfile)
-
 def testCompare():
     profileGolf1.compareProfiles()
 
@@ -33,7 +28,7 @@ def testMultiple(dfs):
 
 def main():
     print("Main starting!")
-    # testStore()
+    testStore()
     # testMultiple([logFilesAsDfs.golf1NotRunning,
     #     logFilesAsDfs.golf2, logFilesAsDfs.golf3])
     print("----- testing compare -----")

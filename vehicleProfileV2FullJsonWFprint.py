@@ -53,9 +53,9 @@ class VehicleProfile():
         json.dump(profile, outFile)
         outFile.close()
 
-    def findProfilesSameId(self):
+    def findProfilesSameId(self, dirToCheck="v2JsonFprintProfiles"):
         matchingProfiles = []
-        with os.scandir("v2JsonFprintProfiles") as profiles:
+        with os.scandir(dirToCheck) as profiles:
             for profileEntry in profiles:
                 infile = open(profileEntry.path, "r")
                 profileDict = json.loads(infile.read())
