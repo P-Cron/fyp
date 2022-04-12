@@ -42,7 +42,7 @@ class VehicleProfile():
         return self.profileName + '\n' + str(self.profileDetails) + '\nFingerprint: ' + self.fPrint
 
     def storeProfile(self):
-        storeDir = 'v2JsonFprintProfiles'
+        storeDir = 'v3ProfilesFixedRanges'
         profile = {"id": self.reg,
         "profile": self.profileDetails,
         "fPrint": self.fPrint}
@@ -67,6 +67,10 @@ class VehicleProfile():
             print("No matching profiles")
         else:
             print("{} matching profiles".format(len(matchProfs)))
+            profNum = 0
+            for prof in matchProfs: # print all the profiles
+                profNum += 1
+                print(profNum, ":\n", prof)
         profNum = 0
         for prof in matchProfs:
             profNum += 1
@@ -89,6 +93,30 @@ class VehicleProfile():
                     print(pid+' matches')
                 else:
                     print(pid+' differs!')
+
+    def compareFprints(self):
+        matchProfs = self.findProfilesSameId()
+        if len(matchProfs) == 0:
+            print("No matching profiles")
+        else:
+            print("{} matching profiles".format(len(matchProfs)))
+            profNum = 0
+            for prof in matchProfs: # print all the profiles
+                profNum += 1
+                print(profNum, ":\n", prof)
+        matching = True
+        for otherProf in matchProfs:
+            if self.fPrint.split(".")[0] != otherProf["fPrint"].split(".")[0]:
+                matching = False
+                print("static portion of fingerprint does not match")
+                # means first part of fprint does not match
+            if self.fPrint.split(".")[1] != otherProf["fPrint"].split(".")[1]:
+                # means 2ndPart does not match
+                matching = False
+                print("dynamic portion of fingerprint does not match")
+            if matching:
+                print("fingerprints match")
+        return matching
 
     def genFprint(self, profile):
         # have static and dynamic portion to fprint
@@ -120,7 +148,7 @@ class VehicleProfile():
         else:
             print("Not generating a new fingerprint. Failed to bring dynamic values to correct base values")
 
-    def compareFprints(self, pathToProfile):
+    def compareFprintsHavePath(self, pathToProfile):
         infile = open(pathToProfile, "r")
         otherProf = json.loads(infile.read())
         infile.close()

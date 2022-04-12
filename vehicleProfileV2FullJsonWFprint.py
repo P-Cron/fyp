@@ -55,7 +55,7 @@ class VehicleProfile():
 
     def findProfilesSameId(self):
         matchingProfiles = []
-        with os.scandir("v2JsonProfiles") as profiles:
+        with os.scandir("v2JsonFprintProfiles") as profiles:
             for profileEntry in profiles:
                 infile = open(profileEntry.path, "r")
                 profileDict = json.loads(infile.read())
@@ -91,6 +91,33 @@ class VehicleProfile():
                 print("profiles match")
             else:
                 print("profiles do not match!")
+
+    def compareFprints(self):
+        matchProfs = self.findProfilesSameId()
+        if len(matchProfs) == 0:
+            print("No matching profiles")
+        else:
+            print("{} matching profiles".format(len(matchProfs)))
+            profNum = 0
+            for prof in matchProfs: # print all the profiles
+                profNum += 1
+                print(profNum, ":\n", prof)
+        matching = True
+        profNum = 0
+        for otherProf in matchProfs:
+            profNum += 1
+            print("Profile number: {}".format(profNum))
+            if self.fPrint.split(".")[0] != otherProf["fPrint"].split(".")[0]:
+                matching = False
+                print("static portion of fingerprint does not match")
+                # means first part of fprint does not match
+            if self.fPrint.split(".")[1] != otherProf["fPrint"].split(".")[1]:
+                # means 2ndPart does not match
+                matching = False
+                print("dynamic portion of fingerprint does not match")
+            if matching:
+                print("fingerprints match")
+        return matching
 
     def genFprint(self, profile):
         # have static and dynamic portion to fprint
@@ -133,7 +160,7 @@ class VehicleProfile():
         else:
             print("Not generating a new fingerprint. Failed to bring dynamic values to correct base values")
 
-    def compareFprints(self, pathToProfile):
+    def compareFprintsHavePath(self, pathToProfile):
         infile = open(pathToProfile, "r")
         otherProf = json.loads(infile.read())
         infile.close()
@@ -150,4 +177,3 @@ class VehicleProfile():
         if matching:
             print("fingerprints match")
         return matching
-        
