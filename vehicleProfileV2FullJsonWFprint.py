@@ -1,9 +1,5 @@
-from datetime import datetime
 import hashlib
 import json
-import os
-from constsAndHelpers import const
-from processPid import processPid, getValidColumns
 from vehicleProfileBase import VehicleProfileBase
 class VehicleProfile(VehicleProfileBase):
     def __init__(self, reg, dataFrame):
