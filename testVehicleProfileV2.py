@@ -22,8 +22,13 @@ def testCompareFprintHavePath():
 
 def testCompareFprint():
     acc10 = vehicleProfileV2FullJsonWFprint.VehicleProfile('08KY10099', logFilesAsDfs.accord10)
+    print(acc10)
     acc10.compareFprints()
-    acc10.bringValsToBaseAndGenFprint()
+    acc10.bringValsToBaseAndGenFprint('v2JsonFprintProfiles\\08KY10099_05-04-22-22_5220.318.json')
+    
+    acc10.compareFprints()
+    print(acc10.getPathsProfilesSameID())
+
 
 
 def testGenFprint():

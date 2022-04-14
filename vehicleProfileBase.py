@@ -51,6 +51,18 @@ class VehicleProfileBase():
                     matchingProfiles.append(profileDict)
         return matchingProfiles
 
+    def getPathsProfilesSameID(self, dirToCheck="v1JsonProfiles"):
+        # returns a list of paths of profiles with the same ID (reg number)
+        matchingProfilePaths = []
+        with os.scandir(dirToCheck) as profiles:
+            for profileEntry in profiles:
+                infile = open(profileEntry.path, "r")
+                profileDict = json.loads(infile.read())
+                infile.close()
+                if profileDict["id"] == self.reg:
+                    matchingProfilePaths.append(profileEntry.path)
+        return matchingProfilePaths
+
         
     def compareProfiles(self, dirToCheck):
         matchProfs = self.findProfilesSameId(dirToCheck)
