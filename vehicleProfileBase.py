@@ -21,7 +21,7 @@ class VehicleProfileBase():
             self.dynPids = const.DEFAULT_DYN_PIDS # and the specific list of pids as well
         possiblePids = const.STATIC_PIDS + self.dynPids
 
-        if recDict[self.reg]["tolerances"]:
+        if self.reg in recDict:
             self.toleranceDict = recDict[self.reg]["tolerances"] # if exists set it
         else:
             self.toleranceDict = const.DEFAULT_TOLERANCES # else take default tolerances
