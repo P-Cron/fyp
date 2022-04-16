@@ -21,14 +21,17 @@ def checkProfsAreDiff():
     print(aven08)
 
 
-def testCompareFprintHavePath():
-    acc10 = vehicleProfileV2FullJsonWFprint.VehicleProfile('08KY10099', logFilesAsDfs.accord10)
+def testCompareFprintUsingPath():
+    # show how a profile which differs from another in its dynamic values
+    # can regenerate its fingerprint in order for the fingerprints to match
     print(acc10)
-    acc10.compareFprintsHavePath('v2JsonFprintProfiles\\08KY10099_05-04-22-22_5220.318.json')
+    acc10.storeProfile()
+    print(acc9)
+    acc9.compareFprintsHavePath(acc9.getPathsProfilesSameID()[-1])
     print("----- generating new fingerprint from previous -----")
-    acc10.bringValsToBaseAndGenFprint('v2JsonFprintProfiles\\08KY10099_05-04-22-22_5220.318.json')
-    print(acc10)
-    acc10.compareFprintsHavePath('v2JsonFprintProfiles\\08KY10099_05-04-22-22_5220.318.json')
+    acc9.bringValsToBaseAndGenFprint(acc9.getPathsProfilesSameID()[-1])
+    print(acc9)
+    acc9.compareFprintsHavePath(acc9.getPathsProfilesSameID()[-1])
 
 def testCompareFprint():
     acc10 = vehicleProfileV2FullJsonWFprint.VehicleProfile('08KY10099', logFilesAsDfs.accord10)
@@ -54,11 +57,11 @@ def testGenFprintOfOther():
 
 def main():
     print("----- testing v2 -----")    
-    checkProfsAreDiff()
+    # checkProfsAreDiff()
 
     # testMultiple([logFilesAsDfs.golf1NotRunning,
     #     logFilesAsDfs.golf2, logFilesAsDfs.golf3])
-    # testCompareFprintHavePath() # useful one
+    testCompareFprintUsingPath() # useful one
     # testCompareFprint()
     # testGenFprint()
     # testStoreV2()
