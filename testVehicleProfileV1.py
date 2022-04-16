@@ -16,6 +16,8 @@ def testStore():
 
 
 def testCompare():
+    # observe that golf1 and golf2 differ slightly but they are still considered a match
+    # because the values are within the specified threshold 
     profileGolf1.compareProfiles()
 
 def testMultiple(dfs):
