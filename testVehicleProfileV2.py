@@ -5,19 +5,21 @@ acc10 = vehicleProfileV2FullJsonWFprint.VehicleProfile('08KY10099', logFilesAsDf
 acc9 = vehicleProfileV2FullJsonWFprint.VehicleProfile('08KY10099', logFilesAsDfs.accord9)
 
 def testStoreV2():
-    # acc10.storeProfile()
-    # print(acc10)
+
     acc9.storeProfile()
+
+
+def checkProfsAreDiff():
+    # show that different vehicles create different profiles and fingerprints
+    print("---- printing accord08 ----")
+    print(acc10)
     cor06 = vehicleProfileV2FullJsonWFprint.VehicleProfile('corolla06', logFilesAsDfs.corolla1)
     print("---- printing corolla06 ----")
     print(cor06)
     aven08 = vehicleProfileV2FullJsonWFprint.VehicleProfile('avensis08', logFilesAsDfs.avensis2)
     print("---- printing avensis08 ----")
-
     print(aven08)
 
-
-    # print(acc9)
 
 def testCompareFprintHavePath():
     acc10 = vehicleProfileV2FullJsonWFprint.VehicleProfile('08KY10099', logFilesAsDfs.accord10)
@@ -52,12 +54,14 @@ def testGenFprintOfOther():
 
 def main():
     print("----- testing v2 -----")    
+    checkProfsAreDiff()
+
     # testMultiple([logFilesAsDfs.golf1NotRunning,
     #     logFilesAsDfs.golf2, logFilesAsDfs.golf3])
     # testCompareFprintHavePath() # useful one
     # testCompareFprint()
     # testGenFprint()
-    testStoreV2()
+    # testStoreV2()
     # testGenFprintOfOther()
 
 if __name__ == "__main__":
