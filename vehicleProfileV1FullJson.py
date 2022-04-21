@@ -1,6 +1,4 @@
-from datetime import datetime
 import json
-import os
 from vehicleProfileBase import VehicleProfileBase 
 
 class VehicleProfile(VehicleProfileBase):
@@ -10,8 +8,7 @@ class VehicleProfile(VehicleProfileBase):
     def __str__(self):
         return super().__str__()
 
-    def storeProfile(self):
-        storeDir = 'v1JsonProfiles'
+    def storeProfile(self, storeDir = 'v1JsonProfiles'):
         profile = {"id": self.reg,
         "profile": self.profileDetails}
         outFile = open(storeDir + '\\'+self.profileName+'.json', 'w')
@@ -21,6 +18,9 @@ class VehicleProfile(VehicleProfileBase):
     def findProfilesSameId(self, dirToCheck="v1JsonProfiles"):
         return super().findProfilesSameId(dirToCheck)
 
-    def compareProfiles(self):
-        super().compareProfiles("v1JsonProfiles")
+    def getPathsProfilesSameID(self, dirToCheck="v1JsonProfiles"):
+        return super().getPathsProfilesSameID(dirToCheck)
+
+    def compareProfiles(self, searchDir='v1JsonProfiles'):
+        super().compareProfiles(searchDir)
             

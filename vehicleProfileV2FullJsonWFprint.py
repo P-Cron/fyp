@@ -12,8 +12,7 @@ class VehicleProfile(VehicleProfileBase):
     def __str__(self):
         return super().__str__() + '\n' '\nFingerprint: ' + self.fPrint
 
-    def storeProfile(self):
-        storeDir = 'v2JsonFprintProfiles'
+    def storeProfile(self, storeDir = 'v2JsonFprintProfiles'):
         profile = {"id": self.reg,
         "profile": self.profileDetails,
         "fPrint": self.fPrint}
@@ -28,8 +27,8 @@ class VehicleProfile(VehicleProfileBase):
         return super().getPathsProfilesSameID(dirToCheck)
 
 
-    def compareProfiles(self):
-        super().compareProfiles("v2JsonFprintProfiles")
+    def compareProfiles(self, searchDir= "v2JsonFprintProfiles"):
+        super().compareProfiles(searchDir)
 
     def compareFprints(self):
         matchProfs = self.findProfilesSameId()

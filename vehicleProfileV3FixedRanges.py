@@ -15,8 +15,7 @@ class VehicleProfile(VehicleProfileBase):
     def __str__(self):
         return super().__str__() + '\n' '\nFingerprint: ' + self.fPrint
 
-    def storeProfile(self):
-        storeDir = 'v3ProfilesFixedRanges'
+    def storeProfile(self, storeDir = 'v3ProfilesFixedRanges'):
         profile = {"id": self.reg,
         "profile": self.profileDetails,
         "fPrint": self.fPrint}
@@ -30,8 +29,8 @@ class VehicleProfile(VehicleProfileBase):
     def getPathsProfilesSameID(self, dirToCheck="v3ProfilesFixedRanges"):
         return super().getPathsProfilesSameID(dirToCheck)
 
-    def compareProfiles(self):
-        super().compareProfiles("v3ProfilesFixedRanges")
+    def compareProfiles(self, searchDir = "v3ProfilesFixedRanges"):
+        super().compareProfiles(searchDir)
 
     def compareFprints(self):
         matchProfs = self.findProfilesSameId()
