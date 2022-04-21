@@ -4,7 +4,7 @@ Run main.py in order to observe simple tests being carried out on v1, v2 and v3 
 
 ## Example Usage
 
-To create a vehicle profile, a CSV file of vehicle data is needed as input. This CSV file is converted to a Pandas Dataframe. The 'PIDs required' section details what PIDs must be collected, and what the columns must be named in the CSV file.
+To create a vehicle profile, a CSV file of vehicle data is needed as input. This CSV file is converted to a Pandas Dataframe. Some PIDs may need to added manually in the vehicle data collection application being used. The PIDs and the names required are specified in the 'PIDs Required' section.
 
 Create the vehicle profile
 ```
@@ -38,8 +38,23 @@ Get the most recently stored profile, and compare fingerprints
 ```
 vehicleProf2.compareFprintsHavePath(vehicleProf2.getPathsProfilesSameID(DIR_TO_SEARCH)[-1])
 ```
-### PIDs required
-Need these columns in CSV file, and need these PIDs added manually when collecting data:
+### PIDs Required
+These columns are needed in CSV the file as the profiler program will look for them in order to build the profile.These PIDs needed to be added manually when collecting vehicle data, they were not in the available PIDs at first:
 
-* 
-* 
+* 0100
+* 011c obd standards vehicle conforms to
+* 0120
+* 0140
+* 0160
+* 0900
+* 0901 vin message count
+* 0902
+* 0903
+* 0904
+* 0905
+* 0906
+* 0907
+* 0908
+* 0909
+* 090A
+* 090B
