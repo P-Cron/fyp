@@ -16,6 +16,7 @@ def testStore():
 
 
 def testCompare():
+    # finds profiles with the same id (reg number) and compares them
     # observe that golf1 and golf2 differ slightly but they are still considered a match
     # because the values are within the specified threshold 
     profileGolf1.compareProfiles()
@@ -29,11 +30,9 @@ def testMultiple(dfs):
         profile.storeProfile()
 
 def main():
-    print("Main starting!")
+    print("\n----- testing v1 -----\n")    
     testStore()
-    # testMultiple([logFilesAsDfs.golf1NotRunning,
-    #     logFilesAsDfs.golf2, logFilesAsDfs.golf3])
-    print("----- testing compare -----")
+    print("----- two profiles stored. testing compare -----")
     testCompare()
 
 if __name__ == "__main__":

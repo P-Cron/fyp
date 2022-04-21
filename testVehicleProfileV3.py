@@ -19,7 +19,7 @@ def testCompareFprint():
     acc10.compareFprintsHavePath(acc10.getPathsProfilesSameID()[-1])
 
 def main():
-    print("----- testing v3 -----")    
+    print("\n----- testing v3 -----\n")    
 
     testCompareFprint()
 

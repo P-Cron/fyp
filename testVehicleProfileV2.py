@@ -28,7 +28,7 @@ def testCompareFprintUsingPath():
     acc10.storeProfile()
     print(acc9)
     acc9.compareFprintsHavePath(acc9.getPathsProfilesSameID()[-1])
-    print("----- generating new fingerprint from previous -----")
+    print("----- generating new fingerprint from previous profile-----")
     acc9.bringValsToBaseAndGenFprint(acc9.getPathsProfilesSameID()[-1])
     print(acc9)
     acc9.compareFprintsHavePath(acc9.getPathsProfilesSameID()[-1])
@@ -56,16 +56,8 @@ def testGenFprintOfOther():
     profileAcc2.storeProfile()
 
 def main():
-    print("----- testing v2 -----")    
-    # checkProfsAreDiff()
-
-    # testMultiple([logFilesAsDfs.golf1NotRunning,
-    #     logFilesAsDfs.golf2, logFilesAsDfs.golf3])
-    testCompareFprintUsingPath() # useful one
-    # testCompareFprint()
-    # testGenFprint()
-    # testStoreV2()
-    # testGenFprintOfOther()
+    print("\n----- testing v2 -----\n")    
+    testCompareFprintUsingPath()
 
 if __name__ == "__main__":
     main()
