@@ -76,7 +76,7 @@ class VehicleProfile(VehicleProfileBase):
 
     def bringDynValsToFixedBase(self):
         # bring dynamic values to a stable base using fixed ranges
-        # already have dict of fixed ranges
+        # already have dict of fixed ranges when instantiating the object
         for pid in self.dynPids:
             baseVal = fixedRangesToFloor.find_le(self.fixedRanges[pid], self.profileDetails[pid])
             self.profileDetails[pid] = baseVal

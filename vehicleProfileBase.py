@@ -38,6 +38,7 @@ class VehicleProfileBase():
                 # must convert to int in order to be able to write as JSON
 
     def __str__(self):
+        # modify how the object is printed
         return self.profileName + '\n' + str(self.profileDetails)
 
     def findProfilesSameId(self, dirToCheck="v1JsonProfiles"):
@@ -53,6 +54,7 @@ class VehicleProfileBase():
 
     def getPathsProfilesSameID(self, dirToCheck="v1JsonProfiles"):
         # returns a list of paths of profiles with the same ID (reg number)
+        # can use -1 as an index to get the most recently added
         matchingProfilePaths = []
         with os.scandir(dirToCheck) as profiles:
             for profileEntry in profiles:
